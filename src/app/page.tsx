@@ -1302,7 +1302,7 @@ function ArticleContent() {
               <div className="article-links" aria-label="Resources">
                 <a
                   className="article-link"
-                  href="https://drive.google.com/drive/folders/1J8w1yQux9ODYqTNZ2ynOIFjerBIQtw1V?usp=sharing"
+                  href="https://arxiv.org/abs/2606.19980"
                   rel="noopener noreferrer"
                   target="_blank"
                 >
