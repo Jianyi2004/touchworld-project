@@ -107,7 +107,7 @@ const titleAuthors = [
   { name: "Zirui Liu", marks: "1,2" },
   { name: "Jiakang Huang", marks: "1,2" },
   { name: "Zirui Chen", marks: "1,2" },
-  { name: "Ruiyang Zhang", marks: "1,2", breakBefore: true },
+  { name: "Ruiyang Zhang", marks: "1,2"},
   { name: "Weizhuo Zhu", marks: "1,2" },
   { name: "Xuhua Song", marks: "1,2" },
   { name: "Shuo Yang", marks: "1,2†", href: "https://homepage.hit.edu.cn/yangshuohit" },
@@ -139,19 +139,7 @@ const article: ArticleBlock[] = [
   { type: "heading", text: "Abstract" },
   {
     type: "paragraph",
-    text: "Dexterous manipulation in everyday environments requires both anticipation and reaction: a robot must predict how contact should evolve while rapidly correcting local errors caused by slip, misalignment, unstable grasping, or force mismatch. Vision and language provide semantic and geometric guidance, but they cannot reliably reveal hidden contact states such as force, slip, and contact stability.",
-  },
-  {
-    type: "paragraph",
-    text: "We introduce TouchWorld, a predictive-and-reactive tactile foundation model for dexterous manipulation. TouchWorld uses a hierarchical policy that separates vision-language subtask planning, tactile world-model prediction, visuo-tactile goal-conditioned action generation, and high-frequency tactile residual refinement.",
-  },
-  {
-    type: "paragraph",
-    text: "A High-Level Planning Layer produces executable subtasks and predicts tactile subgoals; a Visuo-Tactile Goal-Conditioned Policy generates nominal action chunks; and a Tactile-Conditioned Refinement Policy performs online residual correction using recent tactile and proprioceptive feedback.",
-  },
-  {
-    type: "paragraph",
-    text: "Across six long-horizon and contact-rich dexterous manipulation tasks, TouchWorld achieves 65.0% success in the clean setting and 53.7% success under human perturbations, outperforming the strongest baseline by 15.7 and 18.5 percentage points, respectively.",
+    text: "Dexterous manipulation in everyday environments requires both anticipation and reaction: a robot must predict how contact should evolve while rapidly correcting local errors caused by slip, misalignment, unstable grasping, or force mismatch. Vision and language provide semantic and geometric guidance, but they cannot reliably reveal hidden contact states such as force, slip, and contact stability. Although tactile sensing exposes these physical cues, most existing policies treat touch as a low-frequency observation stream within a monolithic action model, coupling slow task reasoning, action generation, and fast contact feedback in a single loop.We introduce TouchWorld, a predictive-and-reactive tactile foundation model for dexterous manipulation. TouchWorld uses a hierarchical policy that separates vision-language subtask planning, tactile world-model prediction, visuo-tactile goal-conditioned action generation, and high-frequency tactile residual refinement. A High-Level Planning Layer produces executable subtasks and predicts tactile subgoals; a Visuo-Tactile Goal-Conditioned Policy generates nominal action chunks; and a Tactile-Conditioned Refinement Policy performs online residual correction using recent tactile and proprioceptive feedback. By using touch as both a predictive contact reference and a fast feedback signal, TouchWorld preserves the semantic generalization of vision-language-action policies while improving local contact adaptation. Across six long-horizon and contact-rich dexterous manipulation tasks, TouchWorld achieves 65.0% success in the clean setting and 53.7% success under human perturbations, outperforming the strongest baseline by 15.7 and 18.5 percentage points, respectively.",
   },
   { type: "heading", text: "Predictive and Reactive Tactile Policy" },
   {
