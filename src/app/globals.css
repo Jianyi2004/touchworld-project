@@ -2681,8 +2681,8 @@ textarea {
 .article-logo-row__image {
   display: block;
   width: auto;
-  /* 20.7 = summed aspect ratios of the three logos, so the row always fits on one line */
-  height: min(34px, calc((100cqw - 2 * var(--logo-gap)) / 20.7));
+  /* 10.3 = summed aspect ratios of the two title logos, so the row always fits on one line. */
+  height: min(58px, calc((100cqw - var(--logo-gap)) / 10.3));
   object-fit: contain;
   opacity: 1 !important;
   filter: none !important;

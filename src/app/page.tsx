@@ -113,8 +113,18 @@ const titleAffiliations = [
 ];
 
 const titleLogos = [
-  { alt: "Harbin Institute of Technology, Shenzhen", src: assetPath("/touchworld/logos/hitsz.png"), width: 295, height: 55 },
-  { alt: "PHANES AI", src: assetPath("/touchworld/logos/sologo-aitools-bgremover-trimmed.png"), width: 938, height: 192 },
+  {
+    alt: "Harbin Institute of Technology, Shenzhen",
+    src: assetPath("/touchworld/logos/hitsz.png"),
+    width: 443,
+    height: 83,
+  },
+  {
+    alt: "PHANES AI",
+    src: assetPath("/touchworld/logos/sologo-aitools-bgremover-trimmed.png"),
+    width: 1407,
+    height: 288,
+  },
 ];
 
 const article: ArticleBlock[] = [
@@ -990,7 +1000,9 @@ function ArticleContent() {
               <div className="article-links" aria-label="Resources">
                 <a
                   className="article-link"
-                  href={assetPath("/touchworld/paper.pdf")}
+                  href="https://arxiv.org/pdf/2607.07287"
+                  rel="noopener noreferrer"
+                  target="_blank"
                 >
                   <FileText aria-hidden="true" size={16} strokeWidth={1.8} />
                   Paper
