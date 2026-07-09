@@ -1,30 +1,11 @@
 "use client";
 
-import { FileText, List, Maximize2, Pause, Play, X } from "lucide-react";
+import { FileText, List, Pause, Play, X } from "lucide-react";
 import Image from "next/image";
 import type { CSSProperties } from "react";
 import { useEffect, useRef, useState } from "react";
-import AutoEnvBenchChart, { AutoEnvBenchScalingChart } from "@/components/AutoEnvBenchChart";
-import ExpandableVideoViewer from "@/components/ExpandableVideoViewer";
 import VideoPlayer from "@/components/VideoPlayer";
-import EnpireFigureOne from "@/components/EnpireFigureOne";
-import IdeaTreeNative from "@/components/IdeaTreeNative";
-import { AgentResourceUtilization } from "@/components/AgentResourceUtilization";
-import PushTStageProgress from "@/components/PushTStageProgress";
-import PushTPolicyPanel from "@/components/PushTPolicyPanel";
-import PushTResetCasePanel from "@/components/PushTResetCasePanel";
 import { ResetVideoCasePanel } from "@/components/ResetVideoCasePanel";
-import { ZiptieRewardPanel } from "@/components/ZiptieRewardPanel";
-import ResetCodePopover from "@/components/ResetCodePopover";
-import { resetCode, type ResetCode } from "@/data/resetCode";
-
-// Auto Reset case subheads that get a "View Code" button beside the title.
-const resetCaseCode: Record<string, ResetCode> = {
-  "Case 1: Push T": resetCode.pusht,
-  "Case 2: Pin Insertion": resetCode.pin,
-  "Case 3: Tie Zip-tie": resetCode.ziptie,
-  "Case 4: GPU Insertion": resetCode.gpu,
-};
 
 type ArticleBlock =
   | { type: "heading"; text: string }
@@ -34,24 +15,14 @@ type ArticleBlock =
   | { type: "list"; items: string[] }
   | { type: "image"; src: string; caption?: string; height?: number; transparent?: boolean; wide?: boolean; width?: number }
   | { type: "video"; src: string; caption?: string; paired?: string }
-  | { type: "pusht-policy" }
   | { type: "pusht-reset-case" }
   | { type: "pin-reset-case" }
   | { type: "ziptie-reset-case" }
-  | { type: "ziptie-reward" }
   | { type: "gpu-reset-case" }
-  | { type: "reset-placeholder"; title: string }
   | { type: "claim-grid" }
   | { type: "learned-policy-panels" }
-  | { type: "idea-tree-embed" }
   | { type: "system-intro" }
-  | { type: "system-diagram" }
-  | { type: "autoenv-chart" }
-  | { type: "autoenv-scaling-chart" }
-  | { type: "simulation-gallery-placeholder" }
-  | { type: "fleet-video" }
-  | { type: "pusht-stage-progress" }
-  | { type: "agent-resource-utilization" };
+  | { type: "trajectory-demo" };
 
 function isFigureBlock(block: ArticleBlock) {
   if (block.type === "image" || block.type === "video") {
@@ -59,202 +30,236 @@ function isFigureBlock(block: ArticleBlock) {
   }
 
   return (
-    block.type === "autoenv-chart" ||
-    block.type === "autoenv-scaling-chart" ||
-    block.type === "system-diagram" ||
-    block.type === "idea-tree-embed" ||
-    block.type === "pusht-stage-progress" ||
-    block.type === "agent-resource-utilization"
+    block.type === "trajectory-demo"
   );
 }
-
-const videos = {
-  heroTeaser: "/videos/website-teaser.mp4",
-};
 
 const outlineItems = [
   { href: "#article-title", label: "Title" },
   { href: "#abstract", label: "Abstract" },
-  { href: "#learned-manipulation-policy", label: "Learned Policy" },
-  { href: "#enpire-system", label: "ENPIRE System" },
-  { href: "#environment-loop", label: "Environment Loop" },
-  { href: "#auto-evaluation", label: "Auto Evaluation", level: 2 },
-  { href: "#auto-reset", label: "Auto Reset", level: 2 },
-  { href: "#case-pusht", label: "Case 1: Push T", level: 3 },
-  { href: "#case-pin-insertion", label: "Case 2: Pin Insertion", level: 3 },
-  { href: "#case-tie-ziptie", label: "Case 3: Tie Zip-tie", level: 3 },
-  { href: "#case-gpu-insertion", label: "Case 4: GPU Insertion", level: 3 },
-  { href: "#policy-improvement", label: "Policy Improvement" },
-  { href: "#autoenvbench", label: "Evaluate Coding Agent" },
-  { href: "#fleet-scaling", label: "Fleet Scaling" },
-  { href: "#simulation-evaluation", label: "Simulation Evaluation" },
+  { href: "#predictive-reactive-policy", label: "Policy Overview" },
+  { href: "#touchworld-system", label: "TouchWorld System" },
+  { href: "#hardware-interface", label: "Hardware Interface" },
+  { href: "#tactile-world-model", label: "Tactile World Model", level: 2 },
+  { href: "#tactile-refinement", label: "Tactile Refinement", level: 2 },
+  { href: "#case-grasp-water-bottle", label: "Case 1: Grasp Water Bottle", level: 3 },
+  { href: "#case-grasp-milktea-bottle", label: "Case 2: Grasp Milktea Bottle", level: 3 },
+  { href: "#case-spray-water", label: "Case 3: Spray Water", level: 3 },
+  { href: "#case-stack-cups", label: "Case 4: Stack Cups", level: 3 },
+  { href: "#experiments", label: "Experiments" },
+  { href: "#trajectory-samples", label: "Trajectory Samples", level: 2 },
+  { href: "#planner-analysis", label: "Planner Analysis" },
+  { href: "#benchmark-results", label: "Benchmark Results" },
+  { href: "#qualitative-analysis", label: "Qualitative Analysis" },
   { href: "#limitations", label: "Limitations & Future Directions" },
   { href: "#acknowledgements", label: "Acknowledgements" },
 ];
 
 const headingIds: Record<string, string> = {
   Abstract: "abstract",
-  "Learned Manipulation Policy": "learned-manipulation-policy",
-  "ENPIRE System": "enpire-system",
-  "From Robot Hardware to an Agent-Operable Environment": "environment-loop",
-  "Agents Improve Policies From Physical Feedback": "policy-improvement",
-  "Evaluate Coding Agent": "autoenvbench",
-  "Scaling Autoresearch on Robot Fleets": "fleet-scaling",
-  "Evaluation in Simulation": "simulation-evaluation",
+  "Predictive and Reactive Tactile Policy": "predictive-reactive-policy",
+  "TouchWorld System": "touchworld-system",
+  "Robot Hardware and Tactile Interface": "hardware-interface",
+  "Experiments": "experiments",
+  "Vision-Language Subtask Planner Analysis": "planner-analysis",
+  "Benchmark Results": "benchmark-results",
+  "Qualitative Inference Analysis": "qualitative-analysis",
   "Limitations & Future Directions": "limitations",
   Acknowledgements: "acknowledgements",
 };
 
 const subsectionIds: Record<string, string> = {
-  "Auto Evaluation": "auto-evaluation",
-  "Auto Reset": "auto-reset",
+  "Tactile World Model Prediction": "tactile-world-model",
+  "Tactile-Conditioned Refinement": "tactile-refinement",
 };
 
 const subheadIds: Record<string, string> = {
-  "Case 1: Push T": "case-pusht",
-  "Case 2: Pin Insertion": "case-pin-insertion",
-  "Case 3: Tie Zip-tie": "case-tie-ziptie",
-  "Case 4: GPU Insertion": "case-gpu-insertion",
+  "Case 1: Grasp Water Bottle": "case-grasp-water-bottle",
+  "Case 2: Grasp Milktea Bottle": "case-grasp-milktea-bottle",
+  "Case 3: Spray Water": "case-spray-water",
+  "Case 4: Stack Cups": "case-stack-cups",
 };
 
+const siteBasePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "/touchworld-project";
+
+function assetPath(path: string) {
+  if (!path || path.startsWith("http") || path.startsWith("data:") || path.startsWith("#")) {
+    return path;
+  }
+
+  return `${siteBasePath}${path.startsWith("/") ? path : `/${path}`}`;
+}
+
 const titleAuthors = [
-  { name: "Wenli Xiao", marks: "1,2†", href: "https://wenlixiao.com/" },
-  { name: "Jia Xie", marks: "2†", href: "https://jia-xie.com" },
-  { name: "Tonghe Zhang", marks: "2†", href: "https://tonghe-zhang.github.io/" },
-  { name: "Haotian Lin", marks: "2†", href: "https://darthutopian.github.io/" },
-  { name: "Letian \"Max\" Fu", marks: "3", href: "https://max-fu.github.io/" },
-  { name: "Haoru Xue", marks: "3", href: "https://haoruxue.github.io/" },
-  { name: "Jalen Lu", marks: "2" },
-  { name: "Yi Yang", marks: "2", breakBefore: true, href: "https://yiyang-23.github.io/" },
-  { name: "Cunxi Dai", marks: "2", href: "https://cunxid.github.io/" },
-  { name: "Zi Wang", marks: "1", href: "https://ziwang1105.github.io/" },
-  { name: "Jimmy Wu", marks: "1", href: "https://jimmyyhwu.github.io/" },
-  { name: "Guanzhi Wang", marks: "1", href: "https://guanzhi.me/" },
-  { name: "S. Shankar Sastry", marks: "3", href: "https://www2.eecs.berkeley.edu/Faculty/Homepages/sastry.html" },
-  { name: "Ken Goldberg", marks: "3", href: "https://goldberg.berkeley.edu/" },
-  { name: "Linxi \"Jim\" Fan", marks: "1‡", breakBefore: true, href: "https://jimfan.me/" },
-  { name: "Yuke Zhu", marks: "1‡", href: "https://yukezhu.me/" },
-  { name: "Guanya Shi", marks: "2‡", href: "https://www.gshi.me/" },
+  { name: "Jianyi Zhou", marks: "1,2*", href: "https://jianyi2004.github.io/" },
+  { name: "Feiyang Hong", marks: "1,2*" },
+  { name: "Yunhao Li", marks: "1,2*" },
+  { name: "Yicheng Zhao", marks: "1,2" },
+  { name: "Yongjue Cen", marks: "1,2" },
+  { name: "Zirui Liu", marks: "1,2" },
+  { name: "Jiakang Huang", marks: "1,2" },
+  { name: "Zirui Chen", marks: "1,2" },
+  { name: "Ruiyang Zhang", marks: "1,2", breakBefore: true },
+  { name: "Weizhuo Zhu", marks: "1,2" },
+  { name: "Xuhua Song", marks: "1,2" },
+  { name: "Shuo Yang", marks: "1,2†", href: "https://homepage.hit.edu.cn/yangshuohit" },
 ];
 
 const titleAffiliations = [
-  { mark: "1", label: "NVIDIA" },
-  { mark: "2", label: "CMU" },
-  { mark: "3", label: "UC Berkeley" },
-  { mark: "†", label: "Equal contribution" },
-  { mark: "‡", label: "Equal advising" },
+  { mark: "1", label: "Harbin Institute of Technology, Shenzhen" },
+  { mark: "2", label: "PHANES AI" },
+  { mark: "*", label: "Equal contribution" },
+  { mark: "†", label: "Corresponding author" },
 ];
 
 const titleLogos = [
-  { alt: "NVIDIA", src: "/images/logos/nvidia-logo.png", width: 2756, height: 540 },
-  { alt: "Carnegie Mellon University", src: "/images/logos/cmu-logo.png", width: 3814, height: 360 },
-  { alt: "UC Berkeley", src: "/images/logos/uc-berkeley-logo.png", width: 1064, height: 214 },
+  { alt: "Harbin Institute of Technology, Shenzhen", src: assetPath("/touchworld/logos/hitsz.png"), width: 295, height: 55 },
+  { alt: "PHANES AI", src: assetPath("/touchworld/logos/sologo-aitools-bgremover-trimmed.png"), width: 938, height: 192 },
 ];
 
 const article: ArticleBlock[] = [
   { type: "heading", text: "Abstract" },
   {
     type: "paragraph",
-    text: "Achieving dexterous robotic manipulation in the real world relies heavily on human supervision and algorithmic engineering, which is a central bottleneck in the pursuit of general physical intelligence. Although emerging coding agents can generate code to automate algorithm search, their successes remain largely confined to digital environments. We conjecture that the missing abstraction to automate robotics research is a repeatable feedback loop for real-world policy improvement: reset the scene, execute a policy, verify the outcome, and refine the next iteration.",
+    text: "Dexterous manipulation in everyday environments requires both anticipation and reaction: a robot must predict how contact should evolve while rapidly correcting local errors caused by slip, misalignment, unstable grasping, or force mismatch. Vision and language provide semantic and geometric guidance, but they cannot reliably reveal hidden contact states such as force, slip, and contact stability.",
   },
   {
     type: "paragraph",
-    text: "To bridge this gap, we introduce ENPIRE, a harness framework for coding agents that instantiates this physical feedback routine with four core modules: an Environment module (EN) for automatic reset and verification, a Policy Improvement module (PI) that launches policy refinement, a Rollout module (R) to evaluate policies with single or multiple physical robots operating in parallel, and an Evolution module (E) in which coding agents analyze logs, consult literature, improve training infrastructure and algorithm code to address failure modes.",
+    text: "We introduce TouchWorld, a predictive-and-reactive tactile foundation model for dexterous manipulation. TouchWorld uses a hierarchical policy that separates vision-language subtask planning, tactile world-model prediction, visuo-tactile goal-conditioned action generation, and high-frequency tactile residual refinement.",
   },
   {
     type: "paragraph",
-    text: "This closed-loop system transforms real-world robot learning into a controllable optimization procedure that agents can manage, thus minimizing human effort while allowing fair ablations across training recipes and agent variants. Powered by ENPIRE, frontier coding agents can autonomously develop a policy to achieve a 99% success rate on challenging, dexterous manipulation tasks in the real world, such as PushT, organizing pins into a pin box, and using a cutter to cut a zip tie.",
+    text: "A High-Level Planning Layer produces executable subtasks and predicts tactile subgoals; a Visuo-Tactile Goal-Conditioned Policy generates nominal action chunks; and a Tactile-Conditioned Refinement Policy performs online residual correction using recent tactile and proprioceptive feedback.",
   },
   {
     type: "paragraph",
-    text: "Coding agents can improve policies with various PI regimes, such as heuristic learning, tool calling, behavior cloning, offline or online RL. Moreover, ENPIRE can be significantly accelerated on a robot fleet, and we propose two metrics, namely, Mean Robot Utilization (MRU) and Mean Token Utilization (MTU) to measure the efficiency of multiagent physical autoresearch. We also include simulation results in RoboCasa. Our findings suggest a practical and scalable path toward autonomously advancing robotics in the real world.",
+    text: "Across six long-horizon and contact-rich dexterous manipulation tasks, TouchWorld achieves 65.0% success in the clean setting and 53.7% success under human perturbations, outperforming the strongest baseline by 15.7 and 18.5 percentage points, respectively.",
   },
-  { type: "heading", text: "Learned Manipulation Policy" },
+  { type: "heading", text: "Predictive and Reactive Tactile Policy" },
   { type: "learned-policy-panels" },
   {
     type: "paragraph",
-    text: "ENPIRE runs fully autonomously on real robots. Working only through the automated reset and verification interface, a team of coding agents proposes algorithmic hypotheses (heuristic learning, behavior cloning, offline and online RL), tests them against the real-world success rate, and keeps the changes that move it. The idea tree below traces that search as a hypothesis git-tree — one branch per agent, one node per idea tried — plotted on the same wall-clock-time axis as the success-rate curve, so you can see the ideas that moved the curve upward.",
+    text: "TouchWorld uses touch in two complementary ways: a predictive pathway anticipates future contact-aware goals, and a reactive pathway corrects local execution errors online. This keeps semantic reasoning, predictive goal generation, nominal action generation, and tactile feedback correction on separate time scales.",
   },
-  { type: "idea-tree-embed" },
-  { type: "heading", text: "ENPIRE System" },
+  {
+    type: "image",
+    src: assetPath("/touchworld/figures/teasor.png"),
+    caption: "Conceptual overview of TouchWorld. The high-level planning layer predicts executable subtasks and visual-tactile subgoals, while the downstream policies generate nominal actions and high-frequency tactile refinements.",
+    height: 1123,
+    wide: true,
+    width: 2783,
+  },
+  { type: "heading", text: "TouchWorld System" },
   { type: "system-intro" },
-  { type: "system-diagram" },
+  {
+    type: "image",
+    src: assetPath("/touchworld/figures/3-layer.png"),
+    caption: "TouchWorld architecture. The subtask planner, tactile world model, goal-conditioned policy, and tactile refinement policy operate at separate semantic, action, and control-loop time scales.",
+    height: 1268,
+    wide: true,
+    width: 2355,
+  },
   {
     type: "heading",
-    text: "From Robot Hardware to an Agent-Operable Environment",
+    text: "Robot Hardware and Tactile Interface",
   },
   {
     type: "paragraph",
-    text: "Before an agent can improve a robot policy, the task must become self-resetting and self-verifying. Two capabilities make this possible: automatic evaluation, which scores the outcome of each trial without human judgment, and automatic reset, which returns the scene to a fresh initial state for the next trial.",
+    text: "TouchWorld is evaluated on a humanoid platform equipped with Wuji dexterous hands and a JQ-Industries tactile glove. The teleoperation side uses a Meta Quest headset, Meta Quest Touch Plus controllers, and a Wuji Glove to collect synchronized visual, proprioceptive, action, and tactile demonstrations.",
   },
-  { type: "subsection", text: "Auto Evaluation" },
+  {
+    type: "image",
+    src: assetPath("/touchworld/figures/hardware.png"),
+    caption: "Hardware platform for TouchWorld. The human teleoperation stack collects visual and hand-motion inputs, while the robot platform executes dexterous manipulation with tactile feedback.",
+    height: 1253,
+    wide: true,
+    width: 2860,
+  },
+  { type: "subsection", text: "Tactile World Model Prediction" },
   {
     type: "paragraph",
-    text: "We use an autoresearch-derived reward function to automatically score the outcome of zip-tie insertion: a detector draws bounding boxes around the zip-tie head and strap, a segmentation model resolves the same parts into masks over the raw view, and each camera view independently judges whether the zip-tie strap passes through the head above a fixed length threshold. The per-camera verdicts are then fused into the final binary reward.",
+    text: "The Tactile World Model predicts future visual-tactile subgoals that describe the expected contact outcome of the current subtask. These predictions serve as contact-aware references for downstream action generation.",
   },
-  { type: "ziptie-reward" },
-  { type: "subsection", text: "Auto Reset" },
+  { type: "subsection", text: "Tactile-Conditioned Refinement" },
   {
     type: "paragraph",
-    text: "The reset panels below show the physical loop that makes repeated experiments possible: select a randomized initial state, run the reset behavior, and verify that the trial is ready for the next policy.",
+    text: "The Tactile-Conditioned Refinement Policy operates faster than the nominal VLA policy. At each refinement step, it reads a sliding nominal-action lookahead window, recent tactile histories, and proprioception, then predicts a residual action correction.",
   },
-  { type: "subhead", text: "Case 1: Push T" },
+  { type: "subhead", text: "Case 1: Grasp Water Bottle" },
   { type: "pusht-reset-case" },
-  { type: "subhead", text: "Case 2: Pin Insertion" },
+  { type: "subhead", text: "Case 2: Grasp Milktea Bottle" },
   { type: "pin-reset-case" },
-  { type: "subhead", text: "Case 3: Tie Zip-tie" },
+  { type: "subhead", text: "Case 3: Spray Water" },
   { type: "ziptie-reset-case" },
-  { type: "subhead", text: "Case 4: GPU Insertion" },
+  { type: "subhead", text: "Case 4: Stack Cups" },
   { type: "gpu-reset-case" },
   {
     type: "list",
     items: [
-      "Automatic reset returns each task to a known randomized initial state without manual intervention.",
-      "Automatic verification records whether the reset succeeded and exposes representative frames for inspection.",
+      "The predictive pathway supplies contact-aware subgoals for stable long-horizon execution.",
+      "The reactive pathway corrects local contact errors caused by slip, perturbation, or misalignment.",
     ],
   },
-  { type: "heading", text: "Agents Improve Policies From Physical Feedback" },
+  { type: "heading", text: "Experiments" },
   {
     type: "paragraph",
-    text: "Once the environment is operable, agents edit policy code, run trials, inspect failures, and decide what to change next. The Push-T panel visualizes actual rollout traces from multiple code agents under the same six initial states so the behavior is inspectable, not just summarized by a success rate.",
+    text: "We evaluate TouchWorld on six real-robot tasks: Water Flower, Tabletop Clearing, Cup Insertion, Power Plug Insertion, Pot Wiping, and Tissue Pulling. Each task is evaluated in both a clean setting and a human perturbation setting.",
   },
-  { type: "pusht-policy" },
-  { type: "heading", text: "Evaluate Coding Agent" },
+  {
+    type: "image",
+    src: assetPath("/touchworld/figures/task_setting.png"),
+    caption: "Real-robot task suite for evaluating TouchWorld. The tasks cover long-horizon planning, precision insertion, continuous contact regulation, soft-object handling, and recovery from human perturbations.",
+    height: 1600,
+    wide: true,
+    width: 2300,
+  },
+  { type: "trajectory-demo" },
+  { type: "heading", text: "Vision-Language Subtask Planner Analysis" },
   {
     type: "paragraph",
-    text: "We evaluate the physical autoresearch capability of three coding agents: Codex with GPT-5.5, Claude Code with Opus 4.7, and Kimi Code with Kimi K2.6. Instead of asking only whether a final policy succeeds, AutoEnvBench tracks agent-driven research progress over wall-clock time across Push-T and Pin Insertion.",
+    text: "The Subtask Planner receives the task instruction, current visual observations, and high-level memory, then emits an executable subtask for downstream policy conditioning. The memory-augmented planner improves subtask accuracy, execution success, and transition consistency.",
   },
-  { type: "autoenv-chart" },
-  { type: "heading", text: "Scaling Autoresearch on Robot Fleets" },
+  { type: "heading", text: "Benchmark Results" },
   {
     type: "paragraph",
-    text: "Scaling the number of agents changes both research progress and hardware pressure. The scaling-law plots compare one-, four-, and eight-agent teams on Push-T and Pin Insertion, while the resource utilization figure shows robot utilization, GPU utilization, token throughput, and the time required to reach task success.",
+    text: "TouchWorld consistently improves over Pi-0.5, FTP-1, and GR00T N1.7 across both clean and human-perturbed rollouts. The gains are especially clear on Power Plug Insertion, Pot Wiping, and Tissue Pulling, where tactile prediction and fast local correction are most important.",
   },
-  { type: "autoenv-scaling-chart" },
-  { type: "fleet-video" },
-  { type: "pusht-stage-progress" },
-  { type: "agent-resource-utilization" },
-  { type: "heading", text: "Evaluation in Simulation" },
+  {
+    type: "image",
+    src: assetPath("/touchworld/figures/ablation_results_stacked.png"),
+    caption: "Stacked ablation results. Each bar reports average success with task-level contributions, comparing clean rollouts against human-perturbed rollouts.",
+    height: 1103,
+    wide: true,
+    width: 2485,
+  },
+  { type: "heading", text: "Qualitative Inference Analysis" },
   {
     type: "paragraph",
-    text: "We also evaluate ENPIRE in simulation to separate agent-driven research behavior from real-world hardware throughput. Simulation tasks let agents run denser ablations, compare policy-improvement regimes under controlled resets, and test whether recipes discovered in the physical loop transfer to broader manipulation settings.",
+    text: "TouchWorld decomposes each instruction into executable intermediate subtasks and predicts tactile subgoals that provide contact-aware references for downstream action generation.",
   },
-  { type: "simulation-gallery-placeholder" },
+  {
+    type: "image",
+    src: assetPath("/touchworld/figures/infer_demo.png"),
+    caption: "Qualitative inference demonstration of TouchWorld. For each task, the model progresses from the initial scene through executable subtasks and predicts tactile subgoals for contact-aware manipulation.",
+    height: 1578,
+    wide: true,
+    width: 2308,
+  },
   { type: "heading", text: "Limitations & Future Directions" },
-  { type: "subhead", text: "Robot and compute resources are underutilized" },
+  { type: "subhead", text: "Task diversity" },
   {
     type: "paragraph",
-    text: "Coding agents do not fully utilize robot resources when they are reading logs, writing code, debugging, or waiting for the language-model backbone. As the number of robots scales, MRU decreases while GPU active utilization increases. Compared to a single-robot setup, agent teams spend more time summarizing peer branches and less time operating the robot, and coding agents may fail to launch enough parallel training sessions to exhaust GPU resources.",
+    text: "Our real-robot evaluation focuses on six representative contact-rich tasks. These tasks cover planning, insertion, wiping, and soft-object handling, but they do not yet exhaust the diversity of household manipulation or deformable-object interactions.",
   },
-  { type: "subhead", text: "Scaling robot fleet causes higher token consumption" },
+  { type: "subhead", text: "Sensor and embodiment transfer" },
   {
     type: "paragraph",
-    text: "Scaling the robot fleet drives higher token consumption: as more agents read logs, summarize peer branches, and coordinate, the total token budget required to reach a successful policy grows with fleet size. Larger fleets can reach success sooner, but the additional speedup comes at the cost of higher token consumption.",
+    text: "TouchWorld is tied to the sensing layout used in our robot platform. Transferring to a different tactile sensor or hand morphology still requires calibration, normalization, and likely a small amount of adaptation data.",
   },
   { type: "heading", text: "Acknowledgements" },
   {
     type: "paragraph",
-    text: "We are grateful to many colleagues whose help made this project possible. We thank Jason Liu, Tony Tao, Tairan He, Alex Lin, Jim Yang, Paul Zhou, and Abhi Maddukuri for insightful discussions and feedback; Yide Shentu, Bike Zhang, Angchen Xie, Dvij Kalaria, and Yuqi Xie for their support with the experiments; Lion Park, Matin Furutan, Jeremy Chimienti, Dennis Da, and Tri Cao for fleet operation; and Tri Cao for the demo shots. We also thank the NVIDIA GEAR Team and the CMU LeCAR Lab for their continuous support.",
+    text: "We thank the Harbin Institute of Technology, Shenzhen and PHANES AI teams for their support with the robot platform, data collection, and experiments.",
   },
 ];
 
@@ -299,396 +304,29 @@ function MediaBlock({ block, figureNumber }: { block: Extract<ArticleBlock, { ty
   );
 }
 
-function FigureOneNative({ figureNumber }: { figureNumber: number }) {
-  return (
-    <figure className="figure-one-embed" id="figure-one-native">
-      <EnpireFigureOne />
-      <figcaption>
-        Figure {figureNumber}: ENPIRE system overview, integrated as a native site component with shared typography
-        and animation.
-      </figcaption>
-    </figure>
-  );
+function touchWorldCaseStates(taskId: string) {
+  return [0, 1, 2, 3].map((episodeIndex) => ({
+    id: `${taskId}-episode-${episodeIndex}`,
+    label: `Trajectory ${episodeIndex + 1}`,
+    poster: assetPath(`/touchworld/cases/${taskId}/episode_${String(episodeIndex).padStart(2, "0")}.jpg`),
+    video: assetPath(`/touchworld/cases/${taskId}/episode_${String(episodeIndex).padStart(2, "0")}.mp4`),
+  }));
 }
 
-function ResetPlaceholderPanel({ title }: { title: string }) {
+function GraspWaterBottleCasePanel() {
   return (
-    <section className="reset-placeholder-panel" aria-label={`${title} auto reset placeholder`}>
-      <div className="reset-placeholder-panel__media">
-        <span>{title}</span>
-        <small>2x</small>
-      </div>
-      <div className="reset-placeholder-panel__rail">
-        <span />
-        <span />
-        <span />
-        <span />
-      </div>
-    </section>
-  );
-}
-
-const robocasaTasks = [
-  {
-    id: "coffee-setup-mug",
-    label: "Coffee Setup Mug",
-    cameraLabel: "right camera",
-    seeds: [
-      {
-        label: "Seed 1",
-        poster: "/images/robocasa/coffee-setup-mug-seed-1-right.jpg",
-        video: "/videos/robocasa/coffee-setup-mug-seed-1-right.mp4",
-      },
-      {
-        label: "Seed 2",
-        poster: "/images/robocasa/coffee-setup-mug-seed-2-right.jpg",
-        video: "/videos/robocasa/coffee-setup-mug-seed-2-right.mp4",
-      },
-    ],
-  },
-  {
-    id: "open-cabinet",
-    label: "Open Cabinet",
-    cameraLabel: "top camera",
-    seeds: [
-      {
-        label: "Seed 1",
-        poster: "/images/robocasa/open-cabinet-seed-1.jpg",
-        video: "/videos/robocasa/open-cabinet-seed-1.mp4",
-      },
-      {
-        label: "Seed 2",
-        poster: "/images/robocasa/open-cabinet-seed-2.jpg",
-        video: "/videos/robocasa/open-cabinet-seed-2.mp4",
-      },
-    ],
-  },
-  {
-    id: "open-drawer",
-    label: "Open Drawer",
-    cameraLabel: "top camera",
-    seeds: [
-      {
-        label: "Seed 1",
-        poster: "/images/robocasa/open-drawer-seed-1.jpg",
-        video: "/videos/robocasa/open-drawer-seed-1.mp4",
-      },
-      {
-        label: "Seed 2",
-        poster: "/images/robocasa/open-drawer-seed-2.jpg",
-        video: "/videos/robocasa/open-drawer-seed-2.mp4",
-      },
-    ],
-  },
-  {
-    id: "open-stand-mixer-head",
-    label: "Open Stand Mixer",
-    cameraLabel: "top camera",
-    seeds: [
-      {
-        label: "Seed 1",
-        poster: "/images/robocasa/open-stand-mixer-head-seed-1.jpg",
-        video: "/videos/robocasa/open-stand-mixer-head-seed-1.mp4",
-      },
-      {
-        label: "Seed 2",
-        poster: "/images/robocasa/open-stand-mixer-head-seed-2.jpg",
-        video: "/videos/robocasa/open-stand-mixer-head-seed-2.mp4",
-      },
-    ],
-  },
-  {
-    id: "pick-place-counter-to-cabinet",
-    label: "Counter to Cabinet",
-    cameraLabel: "top camera",
-    seeds: [
-      {
-        label: "Seed 1",
-        poster: "/images/robocasa/pick-place-counter-to-cabinet-seed-1.jpg",
-        video: "/videos/robocasa/pick-place-counter-to-cabinet-seed-1.mp4",
-      },
-      {
-        label: "Seed 2",
-        poster: "/images/robocasa/pick-place-counter-to-cabinet-seed-2.jpg",
-        video: "/videos/robocasa/pick-place-counter-to-cabinet-seed-2.mp4",
-      },
-    ],
-  },
-  {
-    id: "pick-place-sink-to-counter",
-    label: "Sink to Counter",
-    cameraLabel: "top camera",
-    seeds: [
-      {
-        label: "Seed 1",
-        poster: "/images/robocasa/pick-place-sink-to-counter-seed-1.jpg",
-        video: "/videos/robocasa/pick-place-sink-to-counter-seed-1.mp4",
-      },
-      {
-        label: "Seed 2",
-        poster: "/images/robocasa/pick-place-sink-to-counter-seed-2.jpg",
-        video: "/videos/robocasa/pick-place-sink-to-counter-seed-2.mp4",
-      },
-    ],
-  },
-  {
-    id: "turn-off-stove",
-    label: "Turn Off Stove",
-    cameraLabel: "top camera",
-    seeds: [
-      {
-        label: "Seed 1",
-        poster: "/images/robocasa/turn-off-stove-seed-1.jpg",
-        video: "/videos/robocasa/turn-off-stove-seed-1.mp4",
-      },
-      {
-        label: "Seed 2",
-        poster: "/images/robocasa/turn-off-stove-seed-2.jpg",
-        video: "/videos/robocasa/turn-off-stove-seed-2.mp4",
-      },
-    ],
-  },
-  {
-    id: "turn-on-sink-faucet",
-    label: "Turn On Sink",
-    cameraLabel: "top camera",
-    seeds: [
-      {
-        label: "Seed 1",
-        poster: "/images/robocasa/turn-on-sink-faucet-seed-1.jpg",
-        video: "/videos/robocasa/turn-on-sink-faucet-seed-1.mp4",
-      },
-      {
-        label: "Seed 2",
-        poster: "/images/robocasa/turn-on-sink-faucet-seed-2.jpg",
-        video: "/videos/robocasa/turn-on-sink-faucet-seed-2.mp4",
-      },
-    ],
-  },
-] as const;
-
-const robocasaSpeeds = [8, 1, 2, 4] as const;
-
-function SimulationGalleryPlaceholder() {
-  const [activeTaskId, setActiveTaskId] = useState<(typeof robocasaTasks)[number]["id"]>(robocasaTasks[0].id);
-  const [playingByIndex, setPlayingByIndex] = useState<boolean[]>(() => robocasaTasks[0].seeds.map(() => true));
-  const [progressByIndex, setProgressByIndex] = useState<number[]>(() => robocasaTasks[0].seeds.map(() => 0));
-  const [speedIndexByIndex, setSpeedIndexByIndex] = useState<number[]>(() => robocasaTasks[0].seeds.map(() => 0));
-  const [viewer, setViewer] = useState<{ src: string; title: string; poster?: string; time: number } | null>(null);
-  const videoRefs = useRef<Array<HTMLVideoElement | null>>([]);
-  const activeTask = robocasaTasks.find((task) => task.id === activeTaskId) ?? robocasaTasks[0];
-
-  useEffect(() => {
-    videoRefs.current.forEach((video) => {
-      if (!video) {
-        return;
-      }
-      video.currentTime = 0;
-      video.playbackRate = robocasaSpeeds[0];
-      video.play().catch(() => undefined);
-    });
-  }, [activeTaskId]);
-
-  const handleSelectTask = (taskId: (typeof robocasaTasks)[number]["id"]) => {
-    if (taskId === activeTaskId) {
-      return;
-    }
-    const nextTask = robocasaTasks.find((task) => task.id === taskId) ?? robocasaTasks[0];
-    setProgressByIndex(nextTask.seeds.map(() => 0));
-    setPlayingByIndex(nextTask.seeds.map(() => true));
-    setSpeedIndexByIndex(nextTask.seeds.map(() => 0));
-    setActiveTaskId(taskId);
-  };
-
-  useEffect(() => {
-    videoRefs.current.forEach((video, index) => {
-      if (!video) {
-        return;
-      }
-      const shouldPlay = playingByIndex[index] ?? true;
-      video.playbackRate = robocasaSpeeds[speedIndexByIndex[index] ?? 0];
-      if (shouldPlay) {
-        video.play().catch(() => undefined);
-      } else {
-        video.pause();
-      }
-    });
-  }, [playingByIndex, speedIndexByIndex]);
-
-  const handleTogglePlayback = (index: number) => {
-    setPlayingByIndex((current) => current.map((isPlaying, itemIndex) => (itemIndex === index ? !isPlaying : isPlaying)));
-  };
-
-  const handleCycleSpeed = (index: number) => {
-    setSpeedIndexByIndex((current) =>
-      current.map((speedIndex, itemIndex) =>
-        itemIndex === index ? (speedIndex + 1) % robocasaSpeeds.length : speedIndex,
-      ),
-    );
-  };
-
-  const handleScrub = (index: number, nextProgress: number) => {
-    const clampedProgress = Math.min(1, Math.max(0, nextProgress));
-    setProgressByIndex((current) => current.map((progress, itemIndex) => (itemIndex === index ? clampedProgress : progress)));
-    const video = videoRefs.current[index];
-    if (!video || !Number.isFinite(video.duration) || video.duration <= 0) {
-      return;
-    }
-    video.currentTime = clampedProgress * video.duration;
-    video.playbackRate = robocasaSpeeds[speedIndexByIndex[index] ?? 0];
-  };
-
-  const handleTimeUpdate = (index: number) => {
-    const video = videoRefs.current[index];
-    if (!video || !Number.isFinite(video.duration) || video.duration <= 0) {
-      return;
-    }
-    const nextProgress = video.currentTime / video.duration;
-    setProgressByIndex((current) => current.map((progress, itemIndex) => (itemIndex === index ? nextProgress : progress)));
-  };
-
-  const handleVideoReady = (video: HTMLVideoElement, index: number) => {
-    video.playbackRate = robocasaSpeeds[speedIndexByIndex[index] ?? 0];
-    if (playingByIndex[index] ?? true) {
-      video.play().catch(() => undefined);
-    }
-  };
-
-  return (
-    <section className="robocasa-gallery" aria-label="RoboCasa camera task gallery">
-      <div className="robocasa-gallery__tasks" aria-label="RoboCasa tasks">
-        {robocasaTasks.map((task) => (
-          <button
-            aria-pressed={task.id === activeTask.id}
-            data-selected={task.id === activeTask.id}
-            key={task.id}
-            onClick={() => handleSelectTask(task.id)}
-            type="button"
-          >
-            {task.label}
-          </button>
-        ))}
-      </div>
-      <div className="robocasa-gallery__videos" aria-label={`${activeTask.label} ${activeTask.cameraLabel} rollouts`}>
-        {activeTask.seeds.map((seed, index) => {
-          const speed = robocasaSpeeds[speedIndexByIndex[index] ?? 0];
-
-          return (
-            <article className="robocasa-gallery__video" key={seed.video}>
-              <video
-                autoPlay
-                loop
-                muted
-                onLoadedMetadata={(event) => handleVideoReady(event.currentTarget, index)}
-                onTimeUpdate={() => handleTimeUpdate(index)}
-                playsInline
-                poster={seed.poster}
-                preload="metadata"
-                ref={(element) => {
-                  videoRefs.current[index] = element;
-                }}
-                src={seed.video}
-              />
-              <button
-                aria-label={`${activeTask.label} ${seed.label} playback speed ${speed}x. Click to change speed.`}
-                className="robocasa-gallery__speed"
-                onClick={() => handleCycleSpeed(index)}
-                type="button"
-              >
-                {speed}x
-              </button>
-              <button
-                aria-label={`Expand ${activeTask.label} ${seed.label} to full-screen player`}
-                className="robocasa-gallery__expand"
-                onClick={() =>
-                  setViewer({
-                    src: seed.video,
-                    title: `${activeTask.label} · ${seed.label}`,
-                    poster: seed.poster,
-                    time: videoRefs.current[index]?.currentTime ?? 0,
-                  })
-                }
-                type="button"
-              >
-                <Maximize2 aria-hidden="true" size={15} strokeWidth={1.8} />
-              </button>
-              <div className="robocasa-gallery__meta">
-                <strong>{activeTask.label}</strong>
-                <span>{seed.label} · {activeTask.cameraLabel}</span>
-              </div>
-              <div className="robocasa-gallery__controls" aria-label={`${activeTask.label} ${seed.label} video controls`}>
-                <button
-                  aria-label={playingByIndex[index] ? `Pause ${seed.label}` : `Play ${seed.label}`}
-                  className="robocasa-gallery__play"
-                  onClick={() => handleTogglePlayback(index)}
-                  type="button"
-                >
-                  {playingByIndex[index] ? <Pause aria-hidden="true" size={15} /> : <Play aria-hidden="true" size={15} />}
-                </button>
-                <label
-                  className="robocasa-gallery__progress"
-                  style={{ "--robocasa-progress": `${(progressByIndex[index] ?? 0) * 100}%` } as CSSProperties}
-                >
-                  <span className="sr-only">{`${seed.label} rollout progress`}</span>
-                  <input
-                    aria-label={`${seed.label} rollout progress`}
-                    max="1"
-                    min="0"
-                    onChange={(event) => handleScrub(index, Number(event.currentTarget.value))}
-                    onInput={(event) => handleScrub(index, Number(event.currentTarget.value))}
-                    step="0.001"
-                    type="range"
-                    value={progressByIndex[index] ?? 0}
-                  />
-                </label>
-              </div>
-            </article>
-          );
-        })}
-      </div>
-      <ExpandableVideoViewer
-        initialTime={viewer?.time ?? 0}
-        isOpen={Boolean(viewer)}
-        loop
-        onClose={() => setViewer(null)}
-        poster={viewer?.poster}
-        src={viewer?.src ?? ""}
-        title={viewer?.title ?? ""}
-      />
-    </section>
+    <ResetVideoCasePanel
+      ariaLabel="Case 1 Grasp Water Bottle trajectories"
+      initialStates={touchWorldCaseStates("grasp_water_bottle")}
+    />
   );
 }
 
 function PinResetCasePanel() {
   return (
     <ResetVideoCasePanel
-      ariaLabel="Case 2 Pin Insertion auto reset"
-      initialStates={[
-        {
-          id: "pin-init-1",
-          label: "Random Init 1",
-          poster: "/images/pin-reset-only-1-frame.jpg",
-          video: "/videos/pin-reset-only-1.mp4",
-        },
-        {
-          id: "pin-init-2",
-          label: "Random Init 2",
-          poster: "/images/pin-reset-only-2-frame.jpg",
-          video: "/videos/pin-reset-only-2.mp4",
-        },
-        {
-          id: "pin-init-3",
-          label: "Random Init 3",
-          poster: "/images/pin-reset-only-3-frame.jpg",
-          video: "/videos/pin-reset-only-3.mp4",
-        },
-        {
-          id: "pin-init-4",
-          label: "Random Init 4",
-          poster: "/images/pin-reset-only-4-frame.jpg",
-          video: "/videos/pin-reset-only-4.mp4",
-        },
-      ]}
+      ariaLabel="Case 2 Grasp Milktea Bottle trajectories"
+      initialStates={touchWorldCaseStates("grasp_milktea_bottle")}
     />
   );
 }
@@ -696,41 +334,16 @@ function PinResetCasePanel() {
 function ZiptieResetCasePanel() {
   return (
     <section className="gpu-reset-section">
-      <aside className="gpu-reset-sidenote" aria-label="Zip-tie reset procedure">
-        <strong>Zip-tie reset</strong>
+      <aside className="gpu-reset-sidenote" aria-label="Contact-rich manipulation procedure">
+        <strong>Contact-rich manipulation</strong>
         <ol>
-          <li>Grasp the zip-tie&apos;s head from anywhere on the table with one hand.</li>
-          <li>Use the other hand to grab and curl its tail, aligning the strap with the head.</li>
+          <li>Predict the expected tactile subgoal for the current manipulation phase.</li>
+          <li>Use tactile feedback to correct local slip, force mismatch, and misalignment online.</li>
         </ol>
       </aside>
       <ResetVideoCasePanel
-        ariaLabel="Case 3 Tie Zip-tie auto reset"
-        initialStates={[
-        {
-          id: "ziptie-init-1",
-          label: "Random Init 1",
-          poster: "/images/ziptie-reset-1-frame.jpg",
-          video: "/videos/ziptie-reset-1.mp4",
-        },
-        {
-          id: "ziptie-init-2",
-          label: "Random Init 2",
-          poster: "/images/ziptie-reset-2-frame.jpg",
-          video: "/videos/ziptie-reset-2.mp4",
-        },
-        {
-          id: "ziptie-init-3",
-          label: "Random Init 3",
-          poster: "/images/ziptie-reset-3-frame.jpg",
-          video: "/videos/ziptie-reset-3.mp4",
-        },
-        {
-          id: "ziptie-init-4",
-          label: "Random Init 4",
-          poster: "/images/ziptie-reset-4-frame.jpg",
-          video: "/videos/ziptie-reset-4.mp4",
-        },
-        ]}
+        ariaLabel="Case 3 Spray Water trajectories"
+        initialStates={touchWorldCaseStates("spray_water")}
       />
     </section>
   );
@@ -739,41 +352,16 @@ function ZiptieResetCasePanel() {
 function GpuResetCasePanel() {
   return (
     <section className="gpu-reset-section">
-      <aside className="gpu-reset-sidenote" aria-label="GPU reset procedure">
-        <strong>GPU reset</strong>
+      <aside className="gpu-reset-sidenote" aria-label="Tactile refinement procedure">
+        <strong>Tactile refinement</strong>
         <ol>
-          <li>Pick up the GPU from anywhere on the table and move it to a pre-insertion pose.</li>
-          <li>Unplug the GPU from the board to return the scene for the next trial.</li>
+          <li>Start from a nominal action chunk generated by the visuo-tactile policy.</li>
+          <li>Refresh residual corrections after new tactile and proprioceptive feedback arrives.</li>
         </ol>
       </aside>
       <ResetVideoCasePanel
-        ariaLabel="Case 4 GPU Insertion auto reset"
-        initialStates={[
-          {
-            id: "gpu-init-1",
-            label: "Random Init 1",
-            poster: "/images/gpu-reset-1-frame.jpg",
-            video: "/videos/gpu-reset-1.mp4",
-          },
-          {
-            id: "gpu-init-2",
-            label: "Random Init 2",
-            poster: "/images/gpu-reset-2-frame.jpg",
-            video: "/videos/gpu-reset-2.mp4",
-          },
-          {
-            id: "gpu-init-3",
-            label: "Random Init 3",
-            poster: "/images/gpu-reset-3-frame.jpg",
-            video: "/videos/gpu-reset-3.mp4",
-          },
-          {
-            id: "gpu-init-4",
-            label: "Random Init 4",
-            poster: "/images/gpu-reset-4-frame.jpg",
-            video: "/videos/gpu-reset-4.mp4",
-          },
-        ]}
+        ariaLabel="Case 4 Stack Cups trajectories"
+        initialStates={touchWorldCaseStates("stack_cups")}
       />
     </section>
   );
@@ -799,11 +387,11 @@ function ClaimGrid() {
   ];
 
   return (
-    <section className="claim-section" aria-label="ENPIRE headline claims">
+    <section className="claim-section" aria-label="TouchWorld headline claims">
       <span className="claim-section__label">Thesis</span>
       <p>
-        The claim is not that a single prompted model solves robotics. The claim is that a coding agent becomes useful
-        when the physical world is instrumented enough for it to run a research loop.
+        The claim is not that touch is simply another observation stream. The claim is that tactile signals should be
+        used both predictively, as contact-aware goals, and reactively, as fast feedback for local correction.
       </p>
       <ol className="claim-list" aria-label="Key claims">
         {claims.map((claim) => (
@@ -843,31 +431,28 @@ function LearnedPolicyPanel({ policy }: { policy: LearnedPolicy }) {
 
 function LearnedPolicyPanels() {
   const policies: LearnedPolicy[] = [
-    { title: "Push T", videoSrc: "/videos/pusht-success.mp4" },
-    { title: "Pin Insertion", videoSrc: "/videos/pin-success.mp4" },
-    { title: "GPU Insertion", videoSrc: "/videos/gpu-success.mp4" },
-    { title: "Tie Ziptie", videoSrc: "/videos/ziptie-success.mp4" },
-    { title: "Cut Ziptie", videoSrc: "/videos/cut-ziptie-success.mp4" },
+    { title: "Grasp Milktea Bottle", videoSrc: assetPath("/touchworld/demos/grasp_milktea_bottle/main_camera.mp4") },
+    { title: "Grasp Water Bottle", videoSrc: assetPath("/touchworld/demos/grasp_water_bottle/main_camera.mp4") },
+    { title: "Spray Water", videoSrc: assetPath("/touchworld/demos/spray_water/main_camera.mp4") },
+    { title: "Stack Cups", videoSrc: assetPath("/touchworld/demos/stack_cups/main_camera.mp4") },
   ];
 
   return (
     <>
       <section className="sidenote-row">
         <p className="learned-policy-summary">
-          Policies trained with ENPIRE reach a 99% pass@8 success rate across the showcased manipulation tasks.
+          TouchWorld improves average success across six contact-rich manipulation tasks in both clean and perturbed
+          settings.
         </p>
-        <aside className="article-sidenote" aria-label="What pass@8 means here">
-          <strong>What &ldquo;pass@8&rdquo; means here</strong>
+        <aside className="article-sidenote" aria-label="Why tactile feedback matters">
+          <strong>Why tactile feedback matters</strong>
           <p>
-            pass@8 is <em>not</em>{" "}best-of-8 i.i.d. samples on the task. Within a single long-horizon
-            rollout, the agentic loop gets up to 8 in-context retries per subtask, each conditioned on the
-            previous failures &mdash; so it measures emergent retry and recovery, not sampling luck.
+            Vision and language can describe the task and scene, but they often miss slip, force, contact stability,
+            and insertion alignment. Touch exposes these hidden local states.
           </p>
           <p>
-            Retries only help to the extent the policy can recover: a policy that can&rsquo;t stays near
-            pass@1 (a 13% policy stays ~13%, not 99%). Reaching 99% over 8 in-context retries is itself the
-            capability we report &mdash; which is why we show the uncut 5-minute rollout here rather than a
-            cherry-picked clip.
+            TouchWorld separates slow semantic planning from high-frequency tactile residual correction, so contact
+            changes can influence control without waiting for the next nominal action chunk.
           </p>
         </aside>
       </section>
@@ -882,36 +467,32 @@ function LearnedPolicyPanels() {
   );
 }
 
-function IdeaTreeEmbed({ figureNumber }: { figureNumber: number }) {
-  return <IdeaTreeNative figureNumber={figureNumber} />;
-}
-
 function ModuleGrid() {
   const modules = [
     {
-      tag: "EN",
-      title: "Environment",
-      text: "Construct reset, safety, verification, and logging interfaces the agent can call.",
+      tag: "SP",
+      title: "Subtask Planner",
+      text: "Decompose long-horizon task instructions into executable subtasks for the downstream policy.",
     },
     {
-      tag: "PI",
-      title: "Policy Improvement",
-      text: "Generate and revise policy code from rewards, videos, traces, and failure cases.",
+      tag: "TWM",
+      title: "Tactile World Model",
+      text: "Predict visual-tactile subgoals that describe expected future contact outcomes.",
     },
     {
-      tag: "R",
-      title: "Rollout",
-      text: "Run budgeted robot trials and preserve the state, action, video, and result for audit.",
+      tag: "VLA",
+      title: "Goal-Conditioned Policy",
+      text: "Generate nominal action chunks from vision, language, proprioception, tactile images, and predicted goals.",
     },
     {
-      tag: "E",
-      title: "Evolution",
-      text: "Compare branches, reuse successful recipes, and prune hypotheses that fail on hardware.",
+      tag: "TRT",
+      title: "Tactile Refinement",
+      text: "Refresh residual corrections online using recent tactile and proprioceptive feedback.",
     },
   ];
 
   return (
-    <aside className="article-sidenote" aria-label="ENPIRE decomposition">
+    <aside className="article-sidenote" aria-label="TouchWorld decomposition">
       <ol>
         {modules.map((module) => (
           <li key={module.tag}>
@@ -935,87 +516,151 @@ function SystemIntro() {
   );
 }
 
-function PushTPolicySection() {
-  return (
-    <section className="pusht-policy-section">
-      <aside className="pusht-policy-sidenote" aria-label="Push T policy prompt">
-        <strong>Push-T setup</strong>
-        <p>
-          Clone{" "}
-          <a href="https://github.com/huggingface/gym-pusht" rel="noreferrer" target="_blank">
-            huggingface/gym-pusht
-          </a>
-          , then prompt a coding agent:
-        </p>
-        <blockquote>
-          Write a heuristic policy, with no neural network training, to achieve a 100% success rate in the Push-T
-          environment over at least 50 continuous episodes. You are not allowed to modify environment code; that is
-          cheating. No cheating. Fan out a subagent team to try approaches. For each policy evaluation, save a video
-          with a unique name and a <code>_success</code> or <code>_failure</code> suffix.
-        </blockquote>
-      </aside>
-      <PushTPolicyPanel />
-    </section>
-  );
-}
+type TouchWorldDemoFrame = {
+  index: number;
+  sourceIndex: number;
+  time: number;
+  subtask: string;
+};
 
-function FleetVideoPanel() {
-  const videoRef = useRef<HTMLVideoElement | null>(null);
-  const fleetVideos = [
-    {
-      id: "pin",
-      label: "Pin Insertion",
-      src: "/videos/pin-fleet.mp4",
-      cropClassName: "fleet-video-panel__video--pin",
-      note: "Each robot is associated with an autoresearch coding agent. The auto-reset environment keeps trying until it resets the pin to a pre-insertion pose, then the coding agent conducts online RL research.",
-    },
-    {
-      id: "pusht",
-      label: "Push T",
-      src: "/videos/pusht-fleet.mp4",
-      cropClassName: "fleet-video-panel__video--pusht",
-      note: "The Push-T fleet view shows parallel physical rollouts for the same research loop: reset the scene, execute a candidate policy, verify the trial, and feed the result back to the agent.",
-    },
-  ] as const;
-  const speeds = [8, 4, 1, 2] as const;
-  const [activeVideoId, setActiveVideoId] = useState<(typeof fleetVideos)[number]["id"]>("pin");
-  const [speedIndex, setSpeedIndex] = useState(0);
-  const [duration, setDuration] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [isViewerOpen, setIsViewerOpen] = useState(false);
-  const [viewerInitialTime, setViewerInitialTime] = useState(0);
+type TouchWorldDemoStreamId = "overview" | "main" | "leftWrist" | "rightWrist" | "tactile" | "subgoal";
+
+type TouchWorldDemoTask = {
+  id: string;
+  label: string;
+  trajectoryLabel: string;
+  fps: number;
+  totalSteps: number;
+  frameCount: number;
+  duration: number;
+  video: string;
+  poster: string;
+  mainVideo?: string;
+  mainPoster?: string;
+  streams?: Record<TouchWorldDemoStreamId, string>;
+  streamPosters?: Record<TouchWorldDemoStreamId, string>;
+  frames: TouchWorldDemoFrame[];
+};
+
+type TouchWorldDemoManifest = {
+  generatedAt: string;
+  source: string;
+  tasks: TouchWorldDemoTask[];
+};
+
+function TouchWorldTrajectoryExplorer({ figureNumber }: { figureNumber: number }) {
+  const [manifest, setManifest] = useState<TouchWorldDemoManifest | null>(null);
+  const [loadError, setLoadError] = useState(false);
+  const [activeTaskId, setActiveTaskId] = useState<string>("");
+  const [frameIndex, setFrameIndex] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(true);
   const [progress, setProgress] = useState(0);
-  const activeVideo = fleetVideos.find((video) => video.id === activeVideoId) ?? fleetVideos[0];
-  const speed = speeds[speedIndex];
-  const percent = Math.round(progress * 100);
+  const [activeStreamId, setActiveStreamId] = useState<TouchWorldDemoStreamId>("overview");
+  const activeVideoRef = useRef<HTMLVideoElement | null>(null);
 
   useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.playbackRate = speed;
-    }
-  }, [speed]);
+    let cancelled = false;
 
-  const cycleSpeed = () => {
-    setSpeedIndex((current) => (current + 1) % speeds.length);
+    fetch(assetPath("/touchworld/demos/manifest.json"))
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Demo manifest request failed with ${response.status}`);
+        }
+        return response.json() as Promise<TouchWorldDemoManifest>;
+      })
+      .then((nextManifest) => {
+        if (cancelled) {
+          return;
+        }
+        setManifest(nextManifest);
+        setActiveTaskId(nextManifest.tasks[0]?.id ?? "");
+      })
+      .catch(() => {
+        if (!cancelled) {
+          setLoadError(true);
+        }
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const activeTask = manifest?.tasks.find((task) => task.id === activeTaskId) ?? manifest?.tasks[0];
+  const currentFrame = activeTask?.frames[frameIndex] ?? activeTask?.frames[0];
+  const streamPanels: Array<{ id: TouchWorldDemoStreamId; label: string; primary?: boolean }> = [
+    { id: "overview", label: "Overview", primary: true },
+    { id: "main", label: "Main camera" },
+    { id: "leftWrist", label: "Left wrist" },
+    { id: "rightWrist", label: "Right wrist" },
+    { id: "tactile", label: "Tactile" },
+    { id: "subgoal", label: "Subgoal grid" },
+  ];
+  const orderedStreamPanels = [
+    ...streamPanels.filter((panel) => panel.id === activeStreamId),
+    ...streamPanels.filter((panel) => panel.id !== activeStreamId),
+  ];
+
+  const getStreamSrc = (streamId: TouchWorldDemoStreamId) =>
+    assetPath(
+      (streamId === "overview" ? activeTask?.video : undefined) ??
+        activeTask?.streams?.[streamId] ??
+        (streamId === "main" ? activeTask?.mainVideo : undefined) ??
+        "",
+    );
+
+  const getStreamPoster = (streamId: TouchWorldDemoStreamId) =>
+    assetPath(
+      (streamId === "overview" ? activeTask?.poster : undefined) ??
+        activeTask?.streamPosters?.[streamId] ??
+        (streamId === "main" ? activeTask?.mainPoster : undefined) ??
+        "",
+    );
+
+  const selectTask = (taskId: string) => {
+    if (taskId !== activeTaskId) {
+      setFrameIndex(0);
+      setProgress(0);
+      setIsPlaying(true);
+      setActiveStreamId("overview");
+      setActiveTaskId(taskId);
+    }
   };
 
-  const handleSelectVideo = (nextVideoId: (typeof fleetVideos)[number]["id"]) => {
-    if (nextVideoId === activeVideoId) {
+  const syncFromVideoTime = (video: HTMLVideoElement) => {
+    if (!activeTask || activeTask.frameCount <= 0) {
       return;
     }
-
-    setActiveVideoId(nextVideoId);
-    setDuration(0);
-    setProgress(0);
-    setIsPlaying(false);
+    const duration = video.duration || activeTask.duration || 0;
+    const nextProgress = duration > 0 ? video.currentTime / duration : 0;
+    const nextFrame = Math.min(
+      activeTask.frameCount - 1,
+      Math.max(0, Math.floor(video.currentTime * activeTask.fps)),
+    );
+    setProgress(nextProgress);
+    setFrameIndex(nextFrame);
   };
 
-  const handleTogglePlayback = async () => {
-    const video = videoRef.current;
-    if (!video) return;
+  const scrubToProgress = (value: number) => {
+    if (!activeTask) {
+      return;
+    }
+    const clamped = Math.min(1, Math.max(0, value));
+    const video = activeVideoRef.current;
+    const duration = video?.duration || activeTask.duration;
+    const nextTime = clamped * duration;
+    if (video) {
+      video.currentTime = Math.min(nextTime, video.duration || nextTime);
+    }
+    setProgress(clamped);
+    setFrameIndex(Math.min(activeTask.frameCount - 1, Math.round(clamped * (activeTask.frameCount - 1))));
+  };
 
-    if (video.paused) {
-      await video.play();
+  const togglePlayback = async () => {
+    const video = activeVideoRef.current;
+
+    if (!video || video.paused) {
+      await video?.play().catch(() => undefined);
       setIsPlaying(true);
     } else {
       video.pause();
@@ -1023,118 +668,162 @@ function FleetVideoPanel() {
     }
   };
 
-  const handleScrub = (nextProgress: number) => {
-    const video = videoRef.current;
-    const clamped = Math.max(0, Math.min(1, nextProgress));
-    setProgress(clamped);
+  if (loadError) {
+    return (
+      <figure className="touchworld-demo" id="trajectory-samples">
+        <div className="touchworld-demo__empty">
+          <strong>Trajectory samples are not extracted yet.</strong>
+          <span>Run bash extract_touchworld_demos.sh, then rebuild or refresh the static preview.</span>
+        </div>
+        <figcaption>Figure {figureNumber}: TouchWorld trajectory sample explorer.</figcaption>
+      </figure>
+    );
+  }
 
-    if (video && duration > 0) {
-      video.currentTime = clamped * duration;
-    }
-  };
-
-  const openViewer = () => {
-    setViewerInitialTime(videoRef.current?.currentTime ?? 0);
-    setIsViewerOpen(true);
-  };
+  if (!activeTask || !currentFrame) {
+    return (
+      <figure className="touchworld-demo" id="trajectory-samples">
+        <div className="touchworld-demo__empty">
+          <strong>Loading trajectory samples...</strong>
+        </div>
+        <figcaption>Figure {figureNumber}: TouchWorld trajectory sample explorer.</figcaption>
+      </figure>
+    );
+  }
 
   return (
-    <section className="fleet-video-section">
-      <aside className="fleet-video-sidenote" aria-label="Autoresearch fleet note">
-        <strong>{activeVideo.label}</strong>
-        <p>{activeVideo.note}</p>
-      </aside>
-      <figure className="fleet-video-panel">
-        <div className="fleet-video-panel__tabs" role="tablist" aria-label="Fleet research panels">
-          {fleetVideos.map((video) => (
+    <figure className="touchworld-demo" id="trajectory-samples">
+      <div className="touchworld-demo__head">
+        <div>
+          <span className="touchworld-demo__eyebrow">Dataset sample</span>
+          <h3>Synchronized observations at 30 frames per second</h3>
+        </div>
+        <div className="touchworld-demo__status">
+          <span>{activeTask.trajectoryLabel} · {activeTask.fps}fps</span>
+          <strong>{frameIndex + 1}/{activeTask.frameCount}</strong>
+        </div>
+      </div>
+
+      <div className="touchworld-demo__tabs" role="tablist" aria-label="TouchWorld dataset tasks">
+        {manifest?.tasks.map((task) => (
+          <button
+            aria-selected={task.id === activeTask.id}
+            data-active={task.id === activeTask.id}
+            key={task.id}
+            onClick={() => selectTask(task.id)}
+            role="tab"
+            type="button"
+          >
+            {task.label}
+          </button>
+        ))}
+      </div>
+
+      <div className="touchworld-demo__stage">
+        <section className="touchworld-demo__streams" aria-label={`${activeTask.label} synchronized observation streams`}>
+          {orderedStreamPanels.map((panel, panelIndex) => (
             <button
-              aria-selected={activeVideo.id === video.id}
-              className="fleet-video-panel__tab"
-              data-active={activeVideo.id === video.id}
-              key={video.id}
-              onClick={() => handleSelectVideo(video.id)}
-              role="tab"
+              aria-pressed={panel.id === activeStreamId}
+              className={`touchworld-demo__video-panel${
+                panelIndex === 0 ? " touchworld-demo__video-panel--primary" : ""
+              }`}
+              data-active={panel.id === activeStreamId}
+              key={`${activeTask.id}-${panel.id}`}
+              onClick={() => {
+                setActiveStreamId(panel.id);
+              }}
               type="button"
             >
-              {video.label}
+              {panelIndex === 0 ? (
+                <video
+                  aria-label={`${activeTask.label} ${panel.label}`}
+                  autoPlay
+                  loop
+                  muted
+                  onLoadedMetadata={(event) => {
+                    event.currentTarget.currentTime = progress * (event.currentTarget.duration || activeTask.duration);
+                    if (isPlaying) {
+                      event.currentTarget.play().catch(() => undefined);
+                    }
+                  }}
+                  onPause={() => setIsPlaying(false)}
+                  onPlay={() => setIsPlaying(true)}
+                  onTimeUpdate={(event) => syncFromVideoTime(event.currentTarget)}
+                  playsInline
+                  poster={getStreamPoster(panel.id)}
+                  preload="auto"
+                  ref={activeVideoRef}
+                  src={getStreamSrc(panel.id)}
+                />
+              ) : (
+                <Image
+                  alt={`${activeTask.label} ${panel.label} preview`}
+                  fill
+                  sizes="(max-width: 900px) 45vw, 130px"
+                  src={getStreamPoster(panel.id)}
+                  unoptimized
+                />
+              )}
+              <span>{panel.label}</span>
             </button>
           ))}
-        </div>
-        <div className="fleet-video-panel__frame">
-          <video
-            aria-label={`${activeVideo.label} autoresearch with robot fleet`}
-            className={activeVideo.cropClassName}
-            key={activeVideo.id}
-            loop
-            muted
-            onLoadedMetadata={(event) => {
-              event.currentTarget.playbackRate = speed;
-              setDuration(event.currentTarget.duration || 0);
-            }}
-            onPause={() => setIsPlaying(false)}
-            onPlay={() => setIsPlaying(true)}
-            onTimeUpdate={(event) => {
-              const video = event.currentTarget;
-              setProgress(video.duration ? video.currentTime / video.duration : 0);
-            }}
-            playsInline
-            preload="metadata"
-            ref={videoRef}
-            src={activeVideo.src}
-          />
-          <button
-            aria-label={`Playback speed ${speed}x. Click to change speed.`}
-            className="fleet-video-panel__speed"
-            onClick={cycleSpeed}
-            type="button"
-          >
-            {speed}x
-          </button>
-          <button
-            aria-label={`Expand ${activeVideo.label} fleet video`}
-            className="video-panel-expand-button"
-            onClick={openViewer}
-            type="button"
-          >
-            <Maximize2 aria-hidden="true" size={16} strokeWidth={1.8} />
-          </button>
-        </div>
-        <div className="pusht-reset-case__controls fleet-video-panel__controls" aria-label="Autoresearch fleet video controls">
-          <button className="pusht-reset-case__play" onClick={handleTogglePlayback} type="button">
-            {isPlaying ? "Pause" : "Play"}
-          </button>
-          <span className="pusht-reset-case__percent">{percent}%</span>
-          <div className="pusht-reset-case__progress-shell" style={{ "--pusht-reset-progress": progress } as CSSProperties}>
-            <div className="pusht-reset-case__progress-rail" aria-hidden="true">
-              <span className="pusht-reset-case__progress-fill" />
-            </div>
-            <input
-              aria-label="Autoresearch fleet video progress"
-              className="pusht-reset-case__progress"
-              max="1"
-              min="0"
-              onChange={(event) => handleScrub(Number(event.currentTarget.value))}
-              step="0.001"
-              type="range"
-              value={progress}
-            />
+        </section>
+        <aside className="touchworld-demo__goals" aria-label="Subtask and trajectory readout">
+          <div className="touchworld-demo__subtask">
+            <span>Current subtask</span>
+            <p>{currentFrame.subtask}</p>
           </div>
-        </div>
-        <figcaption>{activeVideo.label} autoresearch with robot fleet</figcaption>
-        <ExpandableVideoViewer
-          className={activeVideo.cropClassName}
-          initialTime={viewerInitialTime}
-          isOpen={isViewerOpen}
-          loop
-          onClose={() => setIsViewerOpen(false)}
-          onCycleSpeed={cycleSpeed}
-          playbackRate={speed}
-          speedLabel={`${speed}x`}
-          src={activeVideo.src}
-          title={`${activeVideo.label} autoresearch with robot fleet`}
-        />
-      </figure>
-    </section>
+          <dl className="touchworld-demo__readout">
+            <div>
+              <dt>Playback</dt>
+              <dd>{isPlaying ? "Playing" : "Paused"}</dd>
+            </div>
+            <div>
+              <dt>Time</dt>
+              <dd>{currentFrame.time.toFixed(2)}s</dd>
+            </div>
+            <div>
+              <dt>Source frame</dt>
+              <dd>{currentFrame.sourceIndex}</dd>
+            </div>
+          </dl>
+        </aside>
+      </div>
+
+      <div className="touchworld-demo__controls" aria-label="Trajectory playback controls">
+        <button
+          aria-label={isPlaying ? "Pause trajectory video" : "Play trajectory video"}
+          onClick={togglePlayback}
+          type="button"
+        >
+          {isPlaying ? <Pause aria-hidden="true" size={15} /> : <Play aria-hidden="true" size={15} />}
+          {isPlaying ? "Pause" : "Play"}
+        </button>
+        <span>{Math.round(progress * 100)}%</span>
+        <label
+          className="touchworld-demo__progress"
+          style={{ "--touchworld-demo-progress": `${progress * 100}%` } as CSSProperties}
+        >
+          <span className="sr-only">Trajectory frame progress</span>
+          <input
+            max="1"
+            min="0"
+            onChange={(event) => scrubToProgress(Number(event.currentTarget.value))}
+            onInput={(event) => scrubToProgress(Number(event.currentTarget.value))}
+            step="0.001"
+            type="range"
+            value={progress}
+          />
+        </label>
+        <span>{activeTask.duration.toFixed(1)}s full trajectory</span>
+      </div>
+
+      <figcaption>
+        Figure {figureNumber}: Full 30fps trajectories from Wuji Stage2. The synchronized panels show RGB observations,
+        tactile observation, and the current subgoal grid; the current executable subtask is synchronized to the video
+        frame.
+      </figcaption>
+    </figure>
   );
 }
 
@@ -1269,8 +958,7 @@ function ArticleContent() {
         <article className="article-shell">
 	        <header className="article-title-block" id="article-title">
 	          <h1>
-	            <span>ENPIRE: Agentic Robot Policy</span>
-	            <span>Self-Improvement in the Real World</span>
+	            TouchWorld: A Predictive and Reactive Tactile Foundation Model for Dexterous Manipulation
 	          </h1>
             <div className="article-authors" aria-label="Authors and affiliations">
               <p className="article-authors__names">
@@ -1302,9 +990,7 @@ function ArticleContent() {
               <div className="article-links" aria-label="Resources">
                 <a
                   className="article-link"
-                  href="https://arxiv.org/abs/2606.19980"
-                  rel="noopener noreferrer"
-                  target="_blank"
+                  href={assetPath("/touchworld/paper.pdf")}
                 >
                   <FileText aria-hidden="true" size={16} strokeWidth={1.8} />
                   Paper
@@ -1345,21 +1031,13 @@ function ArticleContent() {
           }
 
           if (block.type === "subhead") {
-            const caseCode = resetCaseCode[block.text];
             return (
               <div
-                className={`article-kicker${caseCode ? " article-kicker--with-code" : ""}`}
+                className="article-kicker"
                 id={subheadIds[block.text]}
                 key={index}
               >
                 <strong>{block.text}</strong>
-                {caseCode ? (
-                  <ResetCodePopover
-                    {...caseCode}
-                    buttonLabel="View Code"
-                    toggleClassName="pusht-code-toggle reset-code-toggle"
-                  />
-                ) : null}
               </div>
             );
           }
@@ -1386,24 +1064,12 @@ function ArticleContent() {
             return <LearnedPolicyPanels key={index} />;
           }
 
-          if (block.type === "idea-tree-embed") {
-            return <IdeaTreeEmbed figureNumber={currentFigureNumber ?? 0} key={index} />;
-          }
-
           if (block.type === "system-intro") {
             return <SystemIntro key={index} />;
           }
 
-          if (block.type === "system-diagram") {
-            return <FigureOneNative figureNumber={currentFigureNumber ?? 0} key={index} />;
-          }
-
-          if (block.type === "pusht-policy") {
-            return <PushTPolicySection key={index} />;
-          }
-
           if (block.type === "pusht-reset-case") {
-            return <PushTResetCasePanel key={index} />;
+            return <GraspWaterBottleCasePanel key={index} />;
           }
 
           if (block.type === "pin-reset-case") {
@@ -1414,40 +1080,12 @@ function ArticleContent() {
             return <ZiptieResetCasePanel key={index} />;
           }
 
-          if (block.type === "ziptie-reward") {
-            return <ZiptieRewardPanel key={index} />;
-          }
-
           if (block.type === "gpu-reset-case") {
             return <GpuResetCasePanel key={index} />;
           }
 
-          if (block.type === "reset-placeholder") {
-            return <ResetPlaceholderPanel key={index} title={block.title} />;
-          }
-
-          if (block.type === "agent-resource-utilization") {
-            return <AgentResourceUtilization figureNumber={currentFigureNumber ?? 0} key={index} />;
-          }
-
-          if (block.type === "autoenv-chart") {
-            return <AutoEnvBenchChart figureNumber={currentFigureNumber ?? 0} key={index} />;
-          }
-
-          if (block.type === "autoenv-scaling-chart") {
-            return <AutoEnvBenchScalingChart figureNumber={currentFigureNumber ?? 0} key={index} />;
-          }
-
-          if (block.type === "simulation-gallery-placeholder") {
-            return <SimulationGalleryPlaceholder key={index} />;
-          }
-
-          if (block.type === "fleet-video") {
-            return <FleetVideoPanel key={index} />;
-          }
-
-          if (block.type === "pusht-stage-progress") {
-            return <PushTStageProgress figureNumber={currentFigureNumber ?? 0} key={index} />;
+          if (block.type === "trajectory-demo") {
+            return <TouchWorldTrajectoryExplorer figureNumber={currentFigureNumber ?? 0} key={index} />;
           }
 
           return <MediaBlock block={block} figureNumber={currentFigureNumber} key={index} />;
@@ -1459,32 +1097,21 @@ function ArticleContent() {
 }
 
 function HeroTeaser() {
-  const videoRef = useRef<HTMLVideoElement | null>(null);
-  // The big ENPIRE overlay reveals once the teaser reaches the 9s mark (the
-  // drone pull-out), then scrolls away with the hero.
-  const [revealed, setRevealed] = useState(false);
-
   return (
     <section className="article-hero">
       <div className="article-hero__sticky">
-        <video
-          aria-label="ENPIRE robot fleet teaser"
-          autoPlay
+        <Image
+          alt="TouchWorld real-robot tactile manipulation tasks"
           className="article-hero__video"
-          loop
-          muted
-          playsInline
-          preload="auto"
-          ref={videoRef}
-          src={videos.heroTeaser}
-          // Reveal the title once the teaser hits the 9s drone pull-out.
-          onTimeUpdate={(e) => {
-            if (e.currentTarget.currentTime >= 9) setRevealed(true);
-          }}
+          height={966}
+          priority
+          sizes="100vw"
+          src={assetPath("/touchworld/figures/background.png")}
+          width={1988}
         />
-        <div className="article-hero__title" data-revealed={revealed}>
-          <span className="article-hero__wordmark" aria-label="ENPIRE">
-            {"ENPIRE".split("").map((ch, i) => (
+        <div className="article-hero__title" data-revealed="true">
+          <span className="article-hero__wordmark" aria-label="TouchWorld">
+            {"TouchWorld".split("").map((ch, i) => (
               <span
                 key={i}
                 aria-hidden="true"

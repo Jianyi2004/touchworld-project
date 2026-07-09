@@ -2245,7 +2245,8 @@ textarea {
   overflow: hidden;
 }
 
-.article-hero video {
+.article-hero video,
+.article-hero__video {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -2277,7 +2278,7 @@ textarea {
   display: flex;
   justify-content: center;
   color: #fff;
-  font-size: clamp(72px, 19vw, 280px);
+  font-size: clamp(56px, 11vw, 160px);
   font-weight: 600;
   letter-spacing: 0.02em;
   line-height: 1;
@@ -2847,7 +2848,7 @@ textarea {
 
 .learned-policy-grid {
   display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 18px;
   width: 100%;
 }
@@ -2871,16 +2872,9 @@ textarea {
 
 .learned-policy-panel:nth-child(1),
 .learned-policy-panel:nth-child(2),
-.learned-policy-panel:nth-child(3) {
-  grid-column: span 2;
-}
-
+.learned-policy-panel:nth-child(3),
 .learned-policy-panel:nth-child(4) {
-  grid-column: 2 / span 2;
-}
-
-.learned-policy-panel:nth-child(5) {
-  grid-column: 4 / span 2;
+  grid-column: span 2;
 }
 
 .learned-policy-panel__surface {
@@ -2888,7 +2882,7 @@ textarea {
   display: flex;
   width: 100%;
   min-height: 176px;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 16 / 9;
   align-items: center;
   justify-content: center;
   overflow: hidden;
@@ -3929,10 +3923,10 @@ textarea {
 }
 
 .media-frame--wide {
-  width: min(1180px, calc(100vw - 48px));
-  margin-right: 50%;
-  margin-left: 50%;
-  transform: translateX(-50%);
+  width: min(965px, 100%);
+  margin-right: auto;
+  margin-left: auto;
+  transform: none;
 }
 
 .media-frame video,
@@ -3961,6 +3955,413 @@ textarea {
   font-size: 19px;
   font-weight: 500;
   line-height: 1.6;
+}
+
+.touchworld-demo {
+  width: min(925px, 100%);
+  margin: 46px auto 0;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.touchworld-demo__head {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 12px;
+}
+
+.touchworld-demo__eyebrow,
+.touchworld-demo__subtask span,
+.touchworld-demo__status span,
+.touchworld-demo__controls span {
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.touchworld-demo__head h3 {
+  margin: 8px 0 0;
+  color: rgba(255, 255, 255, 0.92);
+  font-family: var(--font-heading);
+  font-size: clamp(22px, 2vw, 28px);
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.touchworld-demo__status {
+  display: grid;
+  justify-items: end;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.touchworld-demo__status strong {
+  color: rgba(255, 255, 255, 0.92);
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.touchworld-demo__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 8px;
+  min-height: 40px;
+}
+
+.touchworld-demo__tabs button {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-bottom: 0;
+  border-radius: 8px 8px 0 0;
+  padding: 0 14px;
+  background: rgba(255, 255, 255, 0.045);
+  color: rgba(255, 255, 255, 0.62);
+  cursor: pointer;
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1;
+  transition:
+    background 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease;
+}
+
+.touchworld-demo__tabs button[data-active="true"] {
+  border-color: #3b3d39;
+  background: #3b3d39;
+  color: #f6f6ef;
+}
+
+.touchworld-demo__tabs button[data-active="false"]:hover,
+.touchworld-demo__tabs button[data-active="false"]:focus-visible {
+  border-color: rgba(255, 255, 255, 0.34);
+  color: rgba(255, 255, 255, 0.86);
+  outline: none;
+}
+
+.touchworld-demo__stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 0.32fr);
+  gap: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.028);
+  padding: 12px;
+}
+
+.touchworld-demo__streams {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+  min-width: 0;
+}
+
+.touchworld-demo__goals {
+  display: grid;
+  align-content: start;
+  gap: 14px;
+  min-width: 0;
+}
+
+.touchworld-demo__video-panel {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  min-width: 0;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 0;
+  background: #050505;
+  color: inherit;
+  cursor: pointer;
+  padding: 0;
+  text-align: left;
+  transition:
+    border-color 160ms ease,
+    transform 160ms ease;
+}
+
+.touchworld-demo__video-panel--primary {
+  grid-column: 1 / -1;
+}
+
+.touchworld-demo__video-panel video,
+.touchworld-demo__video-panel img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  object-fit: contain;
+}
+
+.touchworld-demo__video-panel span {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  padding: 5px 7px;
+  background: rgba(0, 0, 0, 0.62);
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.touchworld-demo__video-panel:hover,
+.touchworld-demo__video-panel:focus-visible {
+  border-color: rgba(255, 255, 255, 0.42);
+  outline: none;
+  transform: translateY(-1px);
+}
+
+.touchworld-demo__video-panel[data-active="true"] {
+  border-color: rgba(255, 255, 255, 0.58);
+}
+
+.touchworld-demo__subtask {
+  min-height: 132px;
+  border-left: 1px solid rgba(255, 255, 255, 0.22);
+  padding: 3px 0 3px 14px;
+}
+
+.article-shell .touchworld-demo__subtask p {
+  margin: 10px 0 0;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: clamp(17px, 1.5vw, 20px);
+  font-weight: 400;
+  line-height: 1.28;
+}
+
+.touchworld-demo__readout {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+}
+
+.touchworld-demo__readout div {
+  display: grid;
+  gap: 5px;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  padding-top: 10px;
+}
+
+.touchworld-demo__readout dt {
+  color: rgba(255, 255, 255, 0.52);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.touchworld-demo__readout dd {
+  color: rgba(255, 255, 255, 0.86);
+  font-family: var(--font-heading);
+  font-size: 18px;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.touchworld-demo__controls {
+  display: grid;
+  grid-template-columns: auto auto minmax(140px, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.035);
+  padding: 10px;
+}
+
+.touchworld-demo__controls button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-width: 86px;
+  min-height: 34px;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.92);
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+  transition:
+    background 160ms ease,
+    border-color 160ms ease;
+}
+
+.touchworld-demo__controls button:hover,
+.touchworld-demo__controls button:focus-visible {
+  border-color: rgba(255, 255, 255, 0.46);
+  background: rgba(255, 255, 255, 0.14);
+  outline: none;
+}
+
+.touchworld-demo__progress {
+  position: relative;
+  display: block;
+  height: 18px;
+}
+
+.touchworld-demo__progress::before,
+.touchworld-demo__progress::after {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  height: 2px;
+  content: "";
+  transform: translateY(-50%);
+}
+
+.touchworld-demo__progress::before {
+  right: 0;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.touchworld-demo__progress::after {
+  width: var(--touchworld-demo-progress, 0%);
+  background: rgba(255, 255, 255, 0.78);
+}
+
+.touchworld-demo__progress input {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 18px;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.touchworld-demo figcaption {
+  margin-top: 16px;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.touchworld-demo__empty {
+  display: grid;
+  gap: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.028);
+  padding: 28px;
+}
+
+.touchworld-demo__empty strong {
+  color: rgba(255, 255, 255, 0.92);
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.touchworld-demo__empty span {
+  color: rgba(255, 255, 255, 0.66);
+  font-size: 15px;
+}
+
+.figure-page[data-theme="day"] .touchworld-demo,
+.figure-page[data-theme="day"] .touchworld-demo__head h3,
+.figure-page[data-theme="day"] .touchworld-demo__status strong,
+.figure-page[data-theme="day"] .article-shell .touchworld-demo__subtask p,
+.figure-page[data-theme="day"] .touchworld-demo figcaption,
+.figure-page[data-theme="day"] .touchworld-demo__empty strong {
+  color: rgba(12, 12, 12, 0.9);
+}
+
+.figure-page[data-theme="day"] .touchworld-demo__eyebrow,
+.figure-page[data-theme="day"] .touchworld-demo__subtask span,
+.figure-page[data-theme="day"] .touchworld-demo__status span,
+.figure-page[data-theme="day"] .touchworld-demo__controls span,
+.figure-page[data-theme="day"] .touchworld-demo__empty span {
+  color: rgba(12, 12, 12, 0.58);
+}
+
+.figure-page[data-theme="day"] .touchworld-demo__tabs button {
+  border-color: rgba(12, 12, 12, 0.16);
+  background: rgba(12, 12, 12, 0.018);
+  color: rgba(12, 12, 12, 0.74);
+}
+
+.figure-page[data-theme="day"] .touchworld-demo__tabs button[data-active="true"] {
+  border-color: #3b3d39;
+  background: #3b3d39;
+  color: #f6f6ef;
+}
+
+.figure-page[data-theme="day"] .touchworld-demo__tabs button[data-active="false"]:hover,
+.figure-page[data-theme="day"] .touchworld-demo__tabs button[data-active="false"]:focus-visible {
+  border-color: rgba(12, 12, 12, 0.3);
+  color: rgba(12, 12, 12, 0.86);
+}
+
+.figure-page[data-theme="day"] .touchworld-demo__stage,
+.figure-page[data-theme="day"] .touchworld-demo__controls,
+.figure-page[data-theme="day"] .touchworld-demo__empty {
+  border-color: rgba(12, 12, 12, 0.16);
+  background: rgba(12, 12, 12, 0.018);
+}
+
+.figure-page[data-theme="day"] .touchworld-demo__video-panel {
+  border-color: rgba(12, 12, 12, 0.14);
+}
+
+.figure-page[data-theme="day"] .touchworld-demo__video-panel:hover,
+.figure-page[data-theme="day"] .touchworld-demo__video-panel:focus-visible {
+  border-color: rgba(12, 12, 12, 0.36);
+}
+
+.figure-page[data-theme="day"] .touchworld-demo__video-panel[data-active="true"] {
+  border-color: rgba(12, 12, 12, 0.46);
+}
+
+.figure-page[data-theme="day"] .touchworld-demo__subtask {
+  border-left-color: rgba(12, 12, 12, 0.2);
+}
+
+.figure-page[data-theme="day"] .touchworld-demo__readout div {
+  border-top-color: rgba(12, 12, 12, 0.14);
+}
+
+.figure-page[data-theme="day"] .touchworld-demo__readout dt {
+  color: rgba(12, 12, 12, 0.52);
+}
+
+.figure-page[data-theme="day"] .touchworld-demo__readout dd {
+  color: rgba(12, 12, 12, 0.86);
+}
+
+.figure-page[data-theme="day"] .touchworld-demo__controls button {
+  border-color: rgba(12, 12, 12, 0.2);
+  background: rgba(12, 12, 12, 0.045);
+  color: rgba(12, 12, 12, 0.9);
+}
+
+.figure-page[data-theme="day"] .touchworld-demo__controls button:hover,
+.figure-page[data-theme="day"] .touchworld-demo__controls button:focus-visible {
+  border-color: rgba(12, 12, 12, 0.38);
+  background: rgba(12, 12, 12, 0.075);
+}
+
+.figure-page[data-theme="day"] .touchworld-demo__progress::before {
+  background: rgba(12, 12, 12, 0.18);
+}
+
+.figure-page[data-theme="day"] .touchworld-demo__progress::after {
+  background: rgba(12, 12, 12, 0.7);
 }
 
 .fleet-video-section {
@@ -5413,7 +5814,8 @@ textarea {
     overflow: visible;
   }
 
-  .article-hero video {
+  .article-hero video,
+  .article-hero__video {
     position: static;
     width: 100%;
     height: auto;
@@ -5427,7 +5829,7 @@ textarea {
   }
 
   .article-hero__wordmark {
-    font-size: clamp(48px, 19vw, 96px);
+    font-size: clamp(38px, 13vw, 72px);
   }
 
   /* The compact mobile hero leads straight into the title + TOC, so the
@@ -5596,6 +5998,69 @@ textarea {
     margin-right: 0;
     margin-left: 0;
     transform: none;
+  }
+
+  .touchworld-demo {
+    width: 100%;
+    margin-right: 0;
+    margin-left: 0;
+    transform: none;
+  }
+
+  .touchworld-demo__head {
+    align-items: start;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .touchworld-demo__status {
+    justify-items: start;
+  }
+
+  .touchworld-demo__tabs {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 1px;
+  }
+
+  .touchworld-demo__tabs button {
+    flex: 0 0 auto;
+    padding: 0 14px;
+    font-size: 16px;
+  }
+
+  .touchworld-demo__stage {
+    grid-template-columns: 1fr;
+    padding: 12px;
+  }
+
+  .touchworld-demo__streams {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .touchworld-demo__video-panel--primary {
+    grid-column: 1 / -1;
+  }
+
+  .touchworld-demo__subtask {
+    min-height: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
+    border-left: 0;
+    padding: 16px 0 4px;
+  }
+
+  .figure-page[data-theme="day"] .touchworld-demo__subtask {
+    border-top-color: rgba(12, 12, 12, 0.16);
+    border-left: 0;
+  }
+
+  .touchworld-demo__controls {
+    grid-template-columns: auto auto;
+  }
+
+  .touchworld-demo__progress {
+    grid-column: 1 / -1;
+    order: 3;
   }
 
   .media-frame--wide {

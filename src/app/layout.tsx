@@ -1,28 +1,70 @@
 import type { Metadata } from "next";
-import { JetBrains_Mono, Source_Serif_4 } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import "./figure-one.css";
 
-const sourceSerif = Source_Serif_4({
+const sourceSerif = localFont({
+  src: [
+    {
+      path: "../../node_modules/@fontsource/source-serif-4/files/source-serif-4-latin-400-normal.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../../node_modules/@fontsource/source-serif-4/files/source-serif-4-latin-500-normal.woff2",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "../../node_modules/@fontsource/source-serif-4/files/source-serif-4-latin-600-normal.woff2",
+      weight: "600",
+      style: "normal",
+    },
+    {
+      path: "../../node_modules/@fontsource/source-serif-4/files/source-serif-4-latin-700-normal.woff2",
+      weight: "700",
+      style: "normal",
+    },
+  ],
   display: "swap",
-  subsets: ["latin"],
   variable: "--font-source-serif",
-  weight: ["400", "500", "600", "700"],
 });
 
-const jetBrainsMono = JetBrains_Mono({
+const jetBrainsMono = localFont({
+  src: [
+    {
+      path: "../../node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-400-normal.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../../node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-500-normal.woff2",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "../../node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-600-normal.woff2",
+      weight: "600",
+      style: "normal",
+    },
+    {
+      path: "../../node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-700-normal.woff2",
+      weight: "700",
+      style: "normal",
+    },
+  ],
   display: "swap",
-  subsets: ["latin"],
   variable: "--font-code",
-  weight: ["400", "500", "600", "700"],
 });
+
+const siteBasePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "/touchworld-project";
 
 export const metadata: Metadata = {
-  title: "ENPIRE: Agentic Robot Policy Self-Improvement in the Real World",
+  title: "TouchWorld: A Predictive and Reactive Tactile Foundation Model",
   description:
-    "Anonymous ENPIRE project website for agentic robot policy self-improvement in the real world.",
+    "Project page for TouchWorld, a predictive and reactive tactile foundation model for dexterous manipulation.",
   icons: {
-    icon: "/seo/favicon.svg",
+    icon: `${siteBasePath}/seo/favicon.svg`,
   },
 };
 
