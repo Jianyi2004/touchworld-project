@@ -1,0 +1,702 @@
+{
+  "source": "/data_all/intern10/egoscale/DiffSynth-Studio/outputs/wan22_rollout17_lora_test_episode_subtasks/step120000_test2eps_subtask_start_s8_episode_separate_native_resolution_wrist_aligned",
+  "fps": 15,
+  "episodes": [
+    {
+      "id": "grasp_milktea_bottle_ep003",
+      "taskId": "grasp_milktea_bottle",
+      "label": "Grasp Milktea Bottle",
+      "episodeLabel": "Episode 003",
+      "globalInstruction": "grasp the milktea bottle and place it into the basket",
+      "fps": 15,
+      "subtasks": [
+        {
+          "id": "subtask_00",
+          "index": 0,
+          "instruction": "Use the right hand to approach and grasp the milktea bottle.",
+          "frameCount": 17,
+          "inputStart": "/touchworld/twm_demos/grasp_milktea_bottle_ep003/subtask_00/input_start.png",
+          "groundTruth": "/touchworld/twm_demos/grasp_milktea_bottle_ep003/subtask_00/ground_truth.mp4",
+          "predicted": "/touchworld/twm_demos/grasp_milktea_bottle_ep003/subtask_00/predicted.mp4",
+          "groundTruthPoster": "/touchworld/twm_demos/grasp_milktea_bottle_ep003/subtask_00/ground_truth_poster.jpg",
+          "predictedPoster": "/touchworld/twm_demos/grasp_milktea_bottle_ep003/subtask_00/predicted_poster.jpg"
+        },
+        {
+          "id": "subtask_01",
+          "index": 1,
+          "instruction": "Use the right hand to lift the milktea bottle and move it to the basket.",
+          "frameCount": 17,
+          "inputStart": "/touchworld/twm_demos/grasp_milktea_bottle_ep003/subtask_01/input_start.png",
+          "groundTruth": "/touchworld/twm_demos/grasp_milktea_bottle_ep003/subtask_01/ground_truth.mp4",
+          "predicted": "/touchworld/twm_demos/grasp_milktea_bottle_ep003/subtask_01/predicted.mp4",
+          "groundTruthPoster": "/touchworld/twm_demos/grasp_milktea_bottle_ep003/subtask_01/ground_truth_poster.jpg",
+          "predictedPoster": "/touchworld/twm_demos/grasp_milktea_bottle_ep003/subtask_01/predicted_poster.jpg"
+        },
+        {
+          "id": "subtask_02",
+          "index": 2,
+          "instruction": "Use the right hand to release the milktea bottle into the basket.",
+          "frameCount": 17,
+          "inputStart": "/touchworld/twm_demos/grasp_milktea_bottle_ep003/subtask_02/input_start.png",
+          "groundTruth": "/touchworld/twm_demos/grasp_milktea_bottle_ep003/subtask_02/ground_truth.mp4",
+          "predicted": "/touchworld/twm_demos/grasp_milktea_bottle_ep003/subtask_02/predicted.mp4",
+          "groundTruthPoster": "/touchworld/twm_demos/grasp_milktea_bottle_ep003/subtask_02/ground_truth_poster.jpg",
+          "predictedPoster": "/touchworld/twm_demos/grasp_milktea_bottle_ep003/subtask_02/predicted_poster.jpg"
+        },
+        {
+          "id": "subtask_03",
+          "index": 3,
+          "instruction": "Return to the initial pose.",
+          "frameCount": 17,
+          "inputStart": "/touchworld/twm_demos/grasp_milktea_bottle_ep003/subtask_03/input_start.png",
+          "groundTruth": "/touchworld/twm_demos/grasp_milktea_bottle_ep003/subtask_03/ground_truth.mp4",
+          "predicted": "/touchworld/twm_demos/grasp_milktea_bottle_ep003/subtask_03/predicted.mp4",
+          "groundTruthPoster": "/touchworld/twm_demos/grasp_milktea_bottle_ep003/subtask_03/ground_truth_poster.jpg",
+          "predictedPoster": "/touchworld/twm_demos/grasp_milktea_bottle_ep003/subtask_03/predicted_poster.jpg"
+        }
+      ]
+    },
+    {
+      "id": "grasp_milktea_bottle_ep029",
+      "taskId": "grasp_milktea_bottle",
+      "label": "Grasp Milktea Bottle",
+      "episodeLabel": "Episode 029",
+      "globalInstruction": "grasp the milktea bottle and place it into the basket",
+      "fps": 15,
+      "subtasks": [
+        {
+          "id": "subtask_00",
+          "index": 0,
+          "instruction": "Use the right hand to approach and grasp the milktea bottle.",
+          "frameCount": 17,
+          "inputStart": "/touchworld/twm_demos/grasp_milktea_bottle_ep029/subtask_00/input_start.png",
+          "groundTruth": "/touchworld/twm_demos/grasp_milktea_bottle_ep029/subtask_00/ground_truth.mp4",
+          "predicted": "/touchworld/twm_demos/grasp_milktea_bottle_ep029/subtask_00/predicted.mp4",
+          "groundTruthPoster": "/touchworld/twm_demos/grasp_milktea_bottle_ep029/subtask_00/ground_truth_poster.jpg",
+          "predictedPoster": "/touchworld/twm_demos/grasp_milktea_bottle_ep029/subtask_00/predicted_poster.jpg"
+        },
+        {
+          "id": "subtask_01",
+          "index": 1,
+          "instruction": "Use the right hand to lift the milktea bottle and move it to the basket.",
+          "frameCount": 17,
+          "inputStart": "/touchworld/twm_demos/grasp_milktea_bottle_ep029/subtask_01/input_start.png",
+          "groundTruth": "/touchworld/twm_demos/grasp_milktea_bottle_ep029/subtask_01/ground_truth.mp4",
+          "predicted": "/touchworld/twm_demos/grasp_milktea_bottle_ep029/subtask_01/predicted.mp4",
+          "groundTruthPoster": "/touchworld/twm_demos/grasp_milktea_bottle_ep029/subtask_01/ground_truth_poster.jpg",
+          "predictedPoster": "/touchworld/twm_demos/grasp_milktea_bottle_ep029/subtask_01/predicted_poster.jpg"
+        },
+        {
+          "id": "subtask_02",
+          "index": 2,
+          "instruction": "Use the right hand to release the milktea bottle into the basket.",
+          "frameCount": 17,
+          "inputStart": "/touchworld/twm_demos/grasp_milktea_bottle_ep029/subtask_02/input_start.png",
+          "groundTruth": "/touchworld/twm_demos/grasp_milktea_bottle_ep029/subtask_02/ground_truth.mp4",
+          "predicted": "/touchworld/twm_demos/grasp_milktea_bottle_ep029/subtask_02/predicted.mp4",
+          "groundTruthPoster": "/touchworld/twm_demos/grasp_milktea_bottle_ep029/subtask_02/ground_truth_poster.jpg",
+          "predictedPoster": "/touchworld/twm_demos/grasp_milktea_bottle_ep029/subtask_02/predicted_poster.jpg"
+        },
+        {
+          "id": "subtask_03",
+          "index": 3,
+          "instruction": "Return to the initial pose.",
+          "frameCount": 17,
+          "inputStart": "/touchworld/twm_demos/grasp_milktea_bottle_ep029/subtask_03/input_start.png",
+          "groundTruth": "/touchworld/twm_demos/grasp_milktea_bottle_ep029/subtask_03/ground_truth.mp4",
+          "predicted": "/touchworld/twm_demos/grasp_milktea_bottle_ep029/subtask_03/predicted.mp4",
+          "groundTruthPoster": "/touchworld/twm_demos/grasp_milktea_bottle_ep029/subtask_03/ground_truth_poster.jpg",
+          "predictedPoster": "/touchworld/twm_demos/grasp_milktea_bottle_ep029/subtask_03/predicted_poster.jpg"
+        }
+      ]
+    },
+    {
+      "id": "grasp_water_bottle_ep023",
+      "taskId": "grasp_water_bottle",
+      "label": "Grasp Water Bottle",
+      "episodeLabel": "Episode 023",
+      "globalInstruction": "grasp the water bottle and place it into the basket",
+      "fps": 15,
+      "subtasks": [
+        {
+          "id": "subtask_00",
+          "index": 0,
+          "instruction": "Use the right hand to approach and grasp the water bottle.",
+          "frameCount": 17,
+          "inputStart": "/touchworld/twm_demos/grasp_water_bottle_ep023/subtask_00/input_start.png",
+          "groundTruth": "/touchworld/twm_demos/grasp_water_bottle_ep023/subtask_00/ground_truth.mp4",
+          "predicted": "/touchworld/twm_demos/grasp_water_bottle_ep023/subtask_00/predicted.mp4",
+          "groundTruthPoster": "/touchworld/twm_demos/grasp_water_bottle_ep023/subtask_00/ground_truth_poster.jpg",
+          "predictedPoster": "/touchworld/twm_demos/grasp_water_bottle_ep023/subtask_00/predicted_poster.jpg"
+        },
+        {
+          "id": "subtask_01",
+          "index": 1,
+          "instruction": "Use the right hand to lift the water bottle and move it to the basket.",
+          "frameCount": 17,
+          "inputStart": "/touchworld/twm_demos/grasp_water_bottle_ep023/subtask_01/input_start.png",
+          "groundTruth": "/touchworld/twm_demos/grasp_water_bottle_ep023/subtask_01/ground_truth.mp4",
+          "predicted": "/touchworld/twm_demos/grasp_water_bottle_ep023/subtask_01/predicted.mp4",
+          "groundTruthPoster": "/touchworld/twm_demos/grasp_water_bottle_ep023/subtask_01/ground_truth_poster.jpg",
+          "predictedPoster": "/touchworld/twm_demos/grasp_water_bottle_ep023/subtask_01/predicted_poster.jpg"
+        },
+        {
+          "id": "subtask_02",
+          "index": 2,
+          "instruction": "Use the right hand to release the water bottle into the basket.",
+          "frameCount": 17,
+          "inputStart": "/touchworld/twm_demos/grasp_water_bottle_ep023/subtask_02/input_start.png",
+          "groundTruth": "/touchworld/twm_demos/grasp_water_bottle_ep023/subtask_02/ground_truth.mp4",
+          "predicted": "/touchworld/twm_demos/grasp_water_bottle_ep023/subtask_02/predicted.mp4",
+          "groundTruthPoster": "/touchworld/twm_demos/grasp_water_bottle_ep023/subtask_02/ground_truth_poster.jpg",
+          "predictedPoster": "/touchworld/twm_demos/grasp_water_bottle_ep023/subtask_02/predicted_poster.jpg"
+        },
+        {
+          "id": "subtask_03",
+          "index": 3,
+          "instruction": "Return to the initial pose.",
+          "frameCount": 17,
+          "inputStart": "/touchworld/twm_demos/grasp_water_bottle_ep023/subtask_03/input_start.png",
+          "groundTruth": "/touchworld/twm_demos/grasp_water_bottle_ep023/subtask_03/ground_truth.mp4",
+          "predicted": "/touchworld/twm_demos/grasp_water_bottle_ep023/subtask_03/predicted.mp4",
+          "groundTruthPoster": "/touchworld/twm_demos/grasp_water_bottle_ep023/subtask_03/ground_truth_poster.jpg",
+          "predictedPoster": "/touchworld/twm_demos/grasp_water_bottle_ep023/subtask_03/predicted_poster.jpg"
+        }
+      ]
+    },
+    {
+      "id": "grasp_water_bottle_ep024",
+      "taskId": "grasp_water_bottle",
+      "label": "Grasp Water Bottle",
+      "episodeLabel": "Episode 024",
+      "globalInstruction": "grasp the water bottle and place it into the basket",
+      "fps": 15,
+      "subtasks": [
+        {
+          "id": "subtask_00",
+          "index": 0,
+          "instruction": "Use the right hand to approach and grasp the water bottle.",
+          "frameCount": 17,
+          "inputStart": "/touchworld/twm_demos/grasp_water_bottle_ep024/subtask_00/input_start.png",
+          "groundTruth": "/touchworld/twm_demos/grasp_water_bottle_ep024/subtask_00/ground_truth.mp4",
+          "predicted": "/touchworld/twm_demos/grasp_water_bottle_ep024/subtask_00/predicted.mp4",
+          "groundTruthPoster": "/touchworld/twm_demos/grasp_water_bottle_ep024/subtask_00/ground_truth_poster.jpg",
+          "predictedPoster": "/touchworld/twm_demos/grasp_water_bottle_ep024/subtask_00/predicted_poster.jpg"
+        },
+        {
+          "id": "subtask_01",
+          "index": 1,
+          "instruction": "Use the right hand to lift the water bottle and move it to the basket.",
+          "frameCount": 17,
+          "inputStart": "/touchworld/twm_demos/grasp_water_bottle_ep024/subtask_01/input_start.png",
+          "groundTruth": "/touchworld/twm_demos/grasp_water_bottle_ep024/subtask_01/ground_truth.mp4",
+          "predicted": "/touchworld/twm_demos/grasp_water_bottle_ep024/subtask_01/predicted.mp4",
+          "groundTruthPoster": "/touchworld/twm_demos/grasp_water_bottle_ep024/subtask_01/ground_truth_poster.jpg",
+          "predictedPoster": "/touchworld/twm_demos/grasp_water_bottle_ep024/subtask_01/predicted_poster.jpg"
+        },
+        {
+          "id": "subtask_02",
+          "index": 2,
+          "instruction": "Use the right hand to release the water bottle into the basket.",
+          "frameCount": 17,
+          "inputStart": "/touchworld/twm_demos/grasp_water_bottle_ep024/subtask_02/input_start.png",
+          "groundTruth": "/touchworld/twm_demos/grasp_water_bottle_ep024/subtask_02/ground_truth.mp4",
+          "predicted": "/touchworld/twm_demos/grasp_water_bottle_ep024/subtask_02/predicted.mp4",
+          "groundTruthPoster": "/touchworld/twm_demos/grasp_water_bottle_ep024/subtask_02/ground_truth_poster.jpg",
+          "predictedPoster": "/touchworld/twm_demos/grasp_water_bottle_ep024/subtask_02/predicted_poster.jpg"
+        },
+        {
+          "id": "subtask_03",
+          "index": 3,
+          "instruction": "Return to the initial pose.",
+          "frameCount": 17,
+          "inputStart": "/touchworld/twm_demos/grasp_water_bottle_ep024/subtask_03/input_start.png",
+          "groundTruth": "/touchworld/twm_demos/grasp_water_bottle_ep024/subtask_03/ground_truth.mp4",
+          "predicted": "/touchworld/twm_demos/grasp_water_bottle_ep024/subtask_03/predicted.mp4",
+          "groundTruthPoster": "/touchworld/twm_demos/grasp_water_bottle_ep024/subtask_03/ground_truth_poster.jpg",
+          "predictedPoster": "/touchworld/twm_demos/grasp_water_bottle_ep024/subtask_03/predicted_poster.jpg"
+        }
+      ]
+    },
+    {
+      "id": "spray_water_ep064",
+      "taskId": "spray_water",
+      "label": "Spray Water",
+      "episodeLabel": "Episode 064",
+      "globalInstruction": "Pick up the spray bottle, pump it to build up pressure, then spray water on the flowers",
+      "fps": 15,
+      "subtasks": [
+        {
+          "id": "subtask_00",
+          "index": 0,
+          "instruction": "Use the right hand to reach and grasp the spray bottle.",
+          "frameCount": 17,
+          "inputStart": "/touchworld/twm_demos/spray_water_ep064/subtask_00/input_start.png",
+          "groundTruth": "/touchworld/twm_demos/spray_water_ep064/subtask_00/ground_truth.mp4",
+          "predicted": "/touchworld/twm_demos/spray_water_ep064/subtask_00/predicted.mp4",
+          "groundTruthPoster": "/touchworld/twm_demos/spray_water_ep064/subtask_00/ground_truth_poster.jpg",
+          "predictedPoster": "/touchworld/twm_demos/spray_water_ep064/subtask_00/predicted_poster.jpg"
+        },
+        {
+          "id": "subtask_01",
+          "index": 1,
+          "instruction": "Use the right hand to lift the spray bottle and hold it steadily.",
+          "frameCount": 17,
+          "inputStart": "/touchworld/twm_demos/spray_water_ep064/subtask_01/input_start.png",
+          "groundTruth": "/touchworld/twm_demos/spray_water_ep064/subtask_01/ground_truth.mp4",
+          "predicted": "/touchworld/twm_demos/spray_water_ep064/subtask_01/predicted.mp4",
+          "groundTruthPoster": "/touchworld/twm_demos/spray_water_ep064/subtask_01/ground_truth_poster.jpg",
+          "predictedPoster": "/touchworld/twm_demos/spray_water_ep064/subtask_01/predicted_poster.jpg"
+        },
+        {
+          "id": "subtask_02",
+          "index": 2,
+          "instruction": "Use the left hand to pull the pump handle upward along the vertical direction, while the right hand keeps holding the bottle steady.",
+          "frameCount": 17,
+          "inputStart": "/touchworld/twm_demos/spray_water_ep064/subtask_02/input_start.png",
+          "groundTruth": "/touchworld/twm_demos/spray_water_ep064/subtask_02/ground_truth.mp4",
+          "predicted": "/touchworld/twm_demos/spray_water_ep064/subtask_02/predicted.mp4",
+          "groundTruthPoster": "/touchworld/twm_demos/spray_water_ep064/subtask_02/ground_truth_poster.jpg",
+          "predictedPoster": "/touchworld/twm_demos/spray_water_ep064/subtask_02/predicted_poster.jpg"
+        },
+        {
+          "id": "subtask_03",
+          "index": 3,
+          "instruction": "Use the left hand to push the pump handle downward along the vertical direction to build up pressure, while the right hand keeps holding the bottle steady.",
+          "frameCount": 17,
+          "inputStart": "/touchworld/twm_demos/spray_water_ep064/subtask_03/input_start.png",
+          "groundTruth": "/touchworld/twm_demos/spray_water_ep064/subtask_03/ground_truth.mp4",
+          "predicted": "/touchworld/twm_demos/spray_water_ep064/subtask_03/predicted.mp4",
+          "groundTruthPoster": "/touchworld/twm_demos/spray_water_ep064/subtask_03/ground_truth_poster.jpg",
+          "predictedPoster": "/touchworld/twm_demos/spray_water_ep064/subtask_03/predicted_poster.jpg"
+        },
+        {
+          "id": "subtask_04",
+          "index": 4,
+          "instruction": "Use the left hand to press the trigger and spray water on the flowers, while the right hand aims the flowers.",
+          "frameCount": 17,
+          "inputStart": "/touchworld/twm_demos/spray_water_ep064/subtask_04/input_start.png",
+          "groundTruth": "/touchworld/twm_demos/spray_water_ep064/subtask_04/ground_truth.mp4",
+          "predicted": "/touchworld/twm_demos/spray_water_ep064/subtask_04/predicted.mp4",
+          "groundTruthPoster": "/touchworld/twm_demos/spray_water_ep064/subtask_04/ground_truth_poster.jpg",
+          "predictedPoster": "/touchworld/twm_demos/spray_water_ep064/subtask_04/predicted_poster.jpg"
+        },
+        {
+          "id": "subtask_05",
+          "index": 5,
+          "instruction": "Use the right hand to place the spray bottle down steadily.",
+          "frameCount": 17,
+          "inputStart": "/touchworld/twm_demos/spray_water_ep064/subtask_05/input_start.png",
+          "groundTruth": "/touchworld/twm_demos/spray_water_ep064/subtask_05/ground_truth.mp4",
+          "predicted": "/touchworld/twm_demos/spray_water_ep064/subtask_05/predicted.mp4",
+          "groundTruthPoster": "/touchworld/twm_demos/spray_water_ep064/subtask_05/ground_truth_poster.jpg",
+          "predictedPoster": "/touchworld/twm_demos/spray_water_ep064/subtask_05/predicted_poster.jpg"
+        },
+        {
+          "id": "subtask_06",
+          "index": 6,
+          "instruction": "Return the robot to the initial pose.",
+          "frameCount": 17,
+          "inputStart": "/touchworld/twm_demos/spray_water_ep064/subtask_06/input_start.png",
+          "groundTruth": "/touchworld/twm_demos/spray_water_ep064/subtask_06/ground_truth.mp4",
+          "predicted": "/touchworld/twm_demos/spray_water_ep064/subtask_06/predicted.mp4",
+          "groundTruthPoster": "/touchworld/twm_demos/spray_water_ep064/subtask_06/ground_truth_poster.jpg",
+          "predictedPoster": "/touchworld/twm_demos/spray_water_ep064/subtask_06/predicted_poster.jpg"
+        }
+      ]
+    },
+    {
+      "id": "spray_water_ep072",
+      "taskId": "spray_water",
+      "label": "Spray Water",
+      "episodeLabel": "Episode 072",
+      "globalInstruction": "Pick up the spray bottle, pump it to build up pressure, then spray water on the flowers",
+      "fps": 15,
+      "subtasks": [
+        {
+          "id": "subtask_00",
+          "index": 0,
+          "instruction": "Use the right hand to reach and grasp the spray bottle.",
+          "frameCount": 17,
+          "inputStart": "/touchworld/twm_demos/spray_water_ep072/subtask_00/input_start.png",
+          "groundTruth": "/touchworld/twm_demos/spray_water_ep072/subtask_00/ground_truth.mp4",
+          "predicted": "/touchworld/twm_demos/spray_water_ep072/subtask_00/predicted.mp4",
+          "groundTruthPoster": "/touchworld/twm_demos/spray_water_ep072/subtask_00/ground_truth_poster.jpg",
+          "predictedPoster": "/touchworld/twm_demos/spray_water_ep072/subtask_00/predicted_poster.jpg"
+        },
+        {
+          "id": "subtask_01",
+          "index": 1,
+          "instruction": "Use the right hand to lift the spray bottle and hold it steadily.",
+          "frameCount": 17,
+          "inputStart": "/touchworld/twm_demos/spray_water_ep072/subtask_01/input_start.png",
+          "groundTruth": "/touchworld/twm_demos/spray_water_ep072/subtask_01/ground_truth.mp4",
+          "predicted": "/touchworld/twm_demos/spray_water_ep072/subtask_01/predicted.mp4",
+          "groundTruthPoster": "/touchworld/twm_demos/spray_water_ep072/subtask_01/ground_truth_poster.jpg",
+          "predictedPoster": "/touchworld/twm_demos/spray_water_ep072/subtask_01/predicted_poster.jpg"
+        },
+        {
+          "id": "subtask_02",
+          "index": 2,
+          "instruction": "Use the left hand to pull the pump handle upward along the vertical direction, while the right hand keeps holding the bottle steady.",
+          "frameCount": 17,
+          "inputStart": "/touchworld/twm_demos/spray_water_ep072/subtask_02/input_start.png",
+          "groundTruth": "/touchworld/twm_demos/spray_water_ep072/subtask_02/ground_truth.mp4",
+          "predicted": "/touchworld/twm_demos/spray_water_ep072/subtask_02/predicted.mp4",
+          "groundTruthPoster": "/touchworld/twm_demos/spray_water_ep072/subtask_02/ground_truth_poster.jpg",
+          "predictedPoster": "/touchworld/twm_demos/spray_water_ep072/subtask_02/predicted_poster.jpg"
+        },
+        {
+          "id": "subtask_03",
+          "index": 3,
+          "instruction": "Use the left hand to push the pump handle downward along the vertical direction to build up pressure, while the right hand keeps holding the bottle steady.",
+          "frameCount": 17,
+          "inputStart": "/touchworld/twm_demos/spray_water_ep072/subtask_03/input_start.png",
+          "groundTruth": "/touchworld/twm_demos/spray_water_ep072/subtask_03/ground_truth.mp4",
+          "predicted": "/touchworld/twm_demos/spray_water_ep072/subtask_03/predicted.mp4",
+          "groundTruthPoster": "/touchworld/twm_demos/spray_water_ep072/subtask_03/ground_truth_poster.jpg",
+          "predictedPoster": "/touchworld/twm_demos/spray_water_ep072/subtask_03/predicted_poster.jpg"
+        },
+        {
+          "id": "subtask_04",
+          "index": 4,
+          "instruction": "Use the left hand to press the trigger and spray water on the flowers, while the right hand aims the flowers.",
+          "frameCount": 17,
+          "inputStart": "/touchworld/twm_demos/spray_water_ep072/subtask_04/input_start.png",
+          "groundTruth": "/touchworld/twm_demos/spray_water_ep072/subtask_04/ground_truth.mp4",
+          "predicted": "/touchworld/twm_demos/spray_water_ep072/subtask_04/predicted.mp4",
+          "groundTruthPoster": "/touchworld/twm_demos/spray_water_ep072/subtask_04/ground_truth_poster.jpg",
+          "predictedPoster": "/touchworld/twm_demos/spray_water_ep072/subtask_04/predicted_poster.jpg"
+        },
+        {
+          "id": "subtask_05",
+          "index": 5,
+          "instruction": "Use the right hand to place the spray bottle down steadily.",
+          "frameCount": 17,
+          "inputStart": "/touchworld/twm_demos/spray_water_ep072/subtask_05/input_start.png",
+          "groundTruth": "/touchworld/twm_demos/spray_water_ep072/subtask_05/ground_truth.mp4",
+          "predicted": "/touchworld/twm_demos/spray_water_ep072/subtask_05/predicted.mp4",
+          "groundTruthPoster": "/touchworld/twm_demos/spray_water_ep072/subtask_05/ground_truth_poster.jpg",
+          "predictedPoster": "/touchworld/twm_demos/spray_water_ep072/subtask_05/predicted_poster.jpg"
+        },
+        {
+          "id": "subtask_06",
+          "index": 6,
+          "instruction": "Return the robot to the initial pose.",
+          "frameCount": 17,
+          "inputStart": "/touchworld/twm_demos/spray_water_ep072/subtask_06/input_start.png",
+          "groundTruth": "/touchworld/twm_demos/spray_water_ep072/subtask_06/ground_truth.mp4",
+          "predicted": "/touchworld/twm_demos/spray_water_ep072/subtask_06/predicted.mp4",
+          "groundTruthPoster": "/touchworld/twm_demos/spray_water_ep072/subtask_06/ground_truth_poster.jpg",
+          "predictedPoster": "/touchworld/twm_demos/spray_water_ep072/subtask_06/predicted_poster.jpg"
+        }
+      ]
+    },
+    {
+      "id": "stack_cups_ep020",
+      "taskId": "stack_cups",
+      "label": "Stack Cups",
+      "episodeLabel": "Episode 020",
+      "globalInstruction": "Pick up the four cups one by one and place them on the cup rack.",
+      "fps": 15,
+      "subtasks": [
+        {
+          "id": "subtask_00",
+          "index": 0,
+          "instruction": "Use the left hand to approach and grasp the lower-left cup.",
+          "frameCount": 17,
+          "inputStart": "/touchworld/twm_demos/stack_cups_ep020/subtask_00/input_start.png",
+          "groundTruth": "/touchworld/twm_demos/stack_cups_ep020/subtask_00/ground_truth.mp4",
+          "predicted": "/touchworld/twm_demos/stack_cups_ep020/subtask_00/predicted.mp4",
+          "groundTruthPoster": "/touchworld/twm_demos/stack_cups_ep020/subtask_00/ground_truth_poster.jpg",
+          "predictedPoster": "/touchworld/twm_demos/stack_cups_ep020/subtask_00/predicted_poster.jpg"
+        },
+        {
+          "id": "subtask_01",
+          "index": 1,
+          "instruction": "Use the left hand to lift the lower-left cup and move it to the cup rack.",
+          "frameCount": 17,
+          "inputStart": "/touchworld/twm_demos/stack_cups_ep020/subtask_01/input_start.png",
+          "groundTruth": "/touchworld/twm_demos/stack_cups_ep020/subtask_01/ground_truth.mp4",
+          "predicted": "/touchworld/twm_demos/stack_cups_ep020/subtask_01/predicted.mp4",
+          "groundTruthPoster": "/touchworld/twm_demos/stack_cups_ep020/subtask_01/ground_truth_poster.jpg",
+          "predictedPoster": "/touchworld/twm_demos/stack_cups_ep020/subtask_01/predicted_poster.jpg"
+        },
+        {
+          "id": "subtask_02",
+          "index": 2,
+          "instruction": "Use the left hand to place the lower-left cup on the cup rack.",
+          "frameCount": 17,
+          "inputStart": "/touchworld/twm_demos/stack_cups_ep020/subtask_02/input_start.png",
+          "groundTruth": "/touchworld/twm_demos/stack_cups_ep020/subtask_02/ground_truth.mp4",
+          "predicted": "/touchworld/twm_demos/stack_cups_ep020/subtask_02/predicted.mp4",
+          "groundTruthPoster": "/touchworld/twm_demos/stack_cups_ep020/subtask_02/ground_truth_poster.jpg",
+          "predictedPoster": "/touchworld/twm_demos/stack_cups_ep020/subtask_02/predicted_poster.jpg"
+        },
+        {
+          "id": "subtask_03",
+          "index": 3,
+          "instruction": "Use the left hand to approach and grasp the upper-left cup.",
+          "frameCount": 17,
+          "inputStart": "/touchworld/twm_demos/stack_cups_ep020/subtask_03/input_start.png",
+          "groundTruth": "/touchworld/twm_demos/stack_cups_ep020/subtask_03/ground_truth.mp4",
+          "predicted": "/touchworld/twm_demos/stack_cups_ep020/subtask_03/predicted.mp4",
+          "groundTruthPoster": "/touchworld/twm_demos/stack_cups_ep020/subtask_03/ground_truth_poster.jpg",
+          "predictedPoster": "/touchworld/twm_demos/stack_cups_ep020/subtask_03/predicted_poster.jpg"
+        },
+        {
+          "id": "subtask_04",
+          "index": 4,
+          "instruction": "Use the left hand to lift the upper-left cup and move it to the cup rack.",
+          "frameCount": 17,
+          "inputStart": "/touchworld/twm_demos/stack_cups_ep020/subtask_04/input_start.png",
+          "groundTruth": "/touchworld/twm_demos/stack_cups_ep020/subtask_04/ground_truth.mp4",
+          "predicted": "/touchworld/twm_demos/stack_cups_ep020/subtask_04/predicted.mp4",
+          "groundTruthPoster": "/touchworld/twm_demos/stack_cups_ep020/subtask_04/ground_truth_poster.jpg",
+          "predictedPoster": "/touchworld/twm_demos/stack_cups_ep020/subtask_04/predicted_poster.jpg"
+        },
+        {
+          "id": "subtask_05",
+          "index": 5,
+          "instruction": "Use the left hand to place the upper-left cup on the cup rack.",
+          "frameCount": 17,
+          "inputStart": "/touchworld/twm_demos/stack_cups_ep020/subtask_05/input_start.png",
+          "groundTruth": "/touchworld/twm_demos/stack_cups_ep020/subtask_05/ground_truth.mp4",
+          "predicted": "/touchworld/twm_demos/stack_cups_ep020/subtask_05/predicted.mp4",
+          "groundTruthPoster": "/touchworld/twm_demos/stack_cups_ep020/subtask_05/ground_truth_poster.jpg",
+          "predictedPoster": "/touchworld/twm_demos/stack_cups_ep020/subtask_05/predicted_poster.jpg"
+        },
+        {
+          "id": "subtask_06",
+          "index": 6,
+          "instruction": "Use the right hand to approach and grasp the lower-right cup.",
+          "frameCount": 17,
+          "inputStart": "/touchworld/twm_demos/stack_cups_ep020/subtask_06/input_start.png",
+          "groundTruth": "/touchworld/twm_demos/stack_cups_ep020/subtask_06/ground_truth.mp4",
+          "predicted": "/touchworld/twm_demos/stack_cups_ep020/subtask_06/predicted.mp4",
+          "groundTruthPoster": "/touchworld/twm_demos/stack_cups_ep020/subtask_06/ground_truth_poster.jpg",
+          "predictedPoster": "/touchworld/twm_demos/stack_cups_ep020/subtask_06/predicted_poster.jpg"
+        },
+        {
+          "id": "subtask_07",
+          "index": 7,
+          "instruction": "Use the right hand to lift the lower-right cup and move it to the cup rack.",
+          "frameCount": 17,
+          "inputStart": "/touchworld/twm_demos/stack_cups_ep020/subtask_07/input_start.png",
+          "groundTruth": "/touchworld/twm_demos/stack_cups_ep020/subtask_07/ground_truth.mp4",
+          "predicted": "/touchworld/twm_demos/stack_cups_ep020/subtask_07/predicted.mp4",
+          "groundTruthPoster": "/touchworld/twm_demos/stack_cups_ep020/subtask_07/ground_truth_poster.jpg",
+          "predictedPoster": "/touchworld/twm_demos/stack_cups_ep020/subtask_07/predicted_poster.jpg"
+        },
+        {
+          "id": "subtask_08",
+          "index": 8,
+          "instruction": "Use the right hand to place the lower-right cup on the cup rack.",
+          "frameCount": 17,
+          "inputStart": "/touchworld/twm_demos/stack_cups_ep020/subtask_08/input_start.png",
+          "groundTruth": "/touchworld/twm_demos/stack_cups_ep020/subtask_08/ground_truth.mp4",
+          "predicted": "/touchworld/twm_demos/stack_cups_ep020/subtask_08/predicted.mp4",
+          "groundTruthPoster": "/touchworld/twm_demos/stack_cups_ep020/subtask_08/ground_truth_poster.jpg",
+          "predictedPoster": "/touchworld/twm_demos/stack_cups_ep020/subtask_08/predicted_poster.jpg"
+        },
+        {
+          "id": "subtask_09",
+          "index": 9,
+          "instruction": "Use the right hand to approach and grasp the upper-right cup.",
+          "frameCount": 17,
+          "inputStart": "/touchworld/twm_demos/stack_cups_ep020/subtask_09/input_start.png",
+          "groundTruth": "/touchworld/twm_demos/stack_cups_ep020/subtask_09/ground_truth.mp4",
+          "predicted": "/touchworld/twm_demos/stack_cups_ep020/subtask_09/predicted.mp4",
+          "groundTruthPoster": "/touchworld/twm_demos/stack_cups_ep020/subtask_09/ground_truth_poster.jpg",
+          "predictedPoster": "/touchworld/twm_demos/stack_cups_ep020/subtask_09/predicted_poster.jpg"
+        },
+        {
+          "id": "subtask_10",
+          "index": 10,
+          "instruction": "Use the right hand to lift the upper-right cup and move it to the cup rack.",
+          "frameCount": 17,
+          "inputStart": "/touchworld/twm_demos/stack_cups_ep020/subtask_10/input_start.png",
+          "groundTruth": "/touchworld/twm_demos/stack_cups_ep020/subtask_10/ground_truth.mp4",
+          "predicted": "/touchworld/twm_demos/stack_cups_ep020/subtask_10/predicted.mp4",
+          "groundTruthPoster": "/touchworld/twm_demos/stack_cups_ep020/subtask_10/ground_truth_poster.jpg",
+          "predictedPoster": "/touchworld/twm_demos/stack_cups_ep020/subtask_10/predicted_poster.jpg"
+        },
+        {
+          "id": "subtask_11",
+          "index": 11,
+          "instruction": "Use the right hand to place the upper-right cup on the cup rack.",
+          "frameCount": 17,
+          "inputStart": "/touchworld/twm_demos/stack_cups_ep020/subtask_11/input_start.png",
+          "groundTruth": "/touchworld/twm_demos/stack_cups_ep020/subtask_11/ground_truth.mp4",
+          "predicted": "/touchworld/twm_demos/stack_cups_ep020/subtask_11/predicted.mp4",
+          "groundTruthPoster": "/touchworld/twm_demos/stack_cups_ep020/subtask_11/ground_truth_poster.jpg",
+          "predictedPoster": "/touchworld/twm_demos/stack_cups_ep020/subtask_11/predicted_poster.jpg"
+        },
+        {
+          "id": "subtask_12",
+          "index": 12,
+          "instruction": "Return to the initial pose.",
+          "frameCount": 17,
+          "inputStart": "/touchworld/twm_demos/stack_cups_ep020/subtask_12/input_start.png",
+          "groundTruth": "/touchworld/twm_demos/stack_cups_ep020/subtask_12/ground_truth.mp4",
+          "predicted": "/touchworld/twm_demos/stack_cups_ep020/subtask_12/predicted.mp4",
+          "groundTruthPoster": "/touchworld/twm_demos/stack_cups_ep020/subtask_12/ground_truth_poster.jpg",
+          "predictedPoster": "/touchworld/twm_demos/stack_cups_ep020/subtask_12/predicted_poster.jpg"
+        }
+      ]
+    },
+    {
+      "id": "stack_cups_ep032",
+      "taskId": "stack_cups",
+      "label": "Stack Cups",
+      "episodeLabel": "Episode 032",
+      "globalInstruction": "Pick up the four cups one by one and place them on the cup rack.",
+      "fps": 15,
+      "subtasks": [
+        {
+          "id": "subtask_00",
+          "index": 0,
+          "instruction": "Use the left hand to approach and grasp the lower-left cup.",
+          "frameCount": 17,
+          "inputStart": "/touchworld/twm_demos/stack_cups_ep032/subtask_00/input_start.png",
+          "groundTruth": "/touchworld/twm_demos/stack_cups_ep032/subtask_00/ground_truth.mp4",
+          "predicted": "/touchworld/twm_demos/stack_cups_ep032/subtask_00/predicted.mp4",
+          "groundTruthPoster": "/touchworld/twm_demos/stack_cups_ep032/subtask_00/ground_truth_poster.jpg",
+          "predictedPoster": "/touchworld/twm_demos/stack_cups_ep032/subtask_00/predicted_poster.jpg"
+        },
+        {
+          "id": "subtask_01",
+          "index": 1,
+          "instruction": "Use the left hand to lift the lower-left cup and move it to the cup rack.",
+          "frameCount": 17,
+          "inputStart": "/touchworld/twm_demos/stack_cups_ep032/subtask_01/input_start.png",
+          "groundTruth": "/touchworld/twm_demos/stack_cups_ep032/subtask_01/ground_truth.mp4",
+          "predicted": "/touchworld/twm_demos/stack_cups_ep032/subtask_01/predicted.mp4",
+          "groundTruthPoster": "/touchworld/twm_demos/stack_cups_ep032/subtask_01/ground_truth_poster.jpg",
+          "predictedPoster": "/touchworld/twm_demos/stack_cups_ep032/subtask_01/predicted_poster.jpg"
+        },
+        {
+          "id": "subtask_02",
+          "index": 2,
+          "instruction": "Use the left hand to place the lower-left cup on the cup rack.",
+          "frameCount": 17,
+          "inputStart": "/touchworld/twm_demos/stack_cups_ep032/subtask_02/input_start.png",
+          "groundTruth": "/touchworld/twm_demos/stack_cups_ep032/subtask_02/ground_truth.mp4",
+          "predicted": "/touchworld/twm_demos/stack_cups_ep032/subtask_02/predicted.mp4",
+          "groundTruthPoster": "/touchworld/twm_demos/stack_cups_ep032/subtask_02/ground_truth_poster.jpg",
+          "predictedPoster": "/touchworld/twm_demos/stack_cups_ep032/subtask_02/predicted_poster.jpg"
+        },
+        {
+          "id": "subtask_03",
+          "index": 3,
+          "instruction": "Use the left hand to approach and grasp the upper-left cup.",
+          "frameCount": 17,
+          "inputStart": "/touchworld/twm_demos/stack_cups_ep032/subtask_03/input_start.png",
+          "groundTruth": "/touchworld/twm_demos/stack_cups_ep032/subtask_03/ground_truth.mp4",
+          "predicted": "/touchworld/twm_demos/stack_cups_ep032/subtask_03/predicted.mp4",
+          "groundTruthPoster": "/touchworld/twm_demos/stack_cups_ep032/subtask_03/ground_truth_poster.jpg",
+          "predictedPoster": "/touchworld/twm_demos/stack_cups_ep032/subtask_03/predicted_poster.jpg"
+        },
+        {
+          "id": "subtask_04",
+          "index": 4,
+          "instruction": "Use the left hand to lift the upper-left cup and move it to the cup rack.",
+          "frameCount": 17,
+          "inputStart": "/touchworld/twm_demos/stack_cups_ep032/subtask_04/input_start.png",
+          "groundTruth": "/touchworld/twm_demos/stack_cups_ep032/subtask_04/ground_truth.mp4",
+          "predicted": "/touchworld/twm_demos/stack_cups_ep032/subtask_04/predicted.mp4",
+          "groundTruthPoster": "/touchworld/twm_demos/stack_cups_ep032/subtask_04/ground_truth_poster.jpg",
+          "predictedPoster": "/touchworld/twm_demos/stack_cups_ep032/subtask_04/predicted_poster.jpg"
+        },
+        {
+          "id": "subtask_05",
+          "index": 5,
+          "instruction": "Use the left hand to place the upper-left cup on the cup rack.",
+          "frameCount": 17,
+          "inputStart": "/touchworld/twm_demos/stack_cups_ep032/subtask_05/input_start.png",
+          "groundTruth": "/touchworld/twm_demos/stack_cups_ep032/subtask_05/ground_truth.mp4",
+          "predicted": "/touchworld/twm_demos/stack_cups_ep032/subtask_05/predicted.mp4",
+          "groundTruthPoster": "/touchworld/twm_demos/stack_cups_ep032/subtask_05/ground_truth_poster.jpg",
+          "predictedPoster": "/touchworld/twm_demos/stack_cups_ep032/subtask_05/predicted_poster.jpg"
+        },
+        {
+          "id": "subtask_06",
+          "index": 6,
+          "instruction": "Use the right hand to approach and grasp the lower-right cup.",
+          "frameCount": 17,
+          "inputStart": "/touchworld/twm_demos/stack_cups_ep032/subtask_06/input_start.png",
+          "groundTruth": "/touchworld/twm_demos/stack_cups_ep032/subtask_06/ground_truth.mp4",
+          "predicted": "/touchworld/twm_demos/stack_cups_ep032/subtask_06/predicted.mp4",
+          "groundTruthPoster": "/touchworld/twm_demos/stack_cups_ep032/subtask_06/ground_truth_poster.jpg",
+          "predictedPoster": "/touchworld/twm_demos/stack_cups_ep032/subtask_06/predicted_poster.jpg"
+        },
+        {
+          "id": "subtask_07",
+          "index": 7,
+          "instruction": "Use the right hand to lift the lower-right cup and move it to the cup rack.",
+          "frameCount": 17,
+          "inputStart": "/touchworld/twm_demos/stack_cups_ep032/subtask_07/input_start.png",
+          "groundTruth": "/touchworld/twm_demos/stack_cups_ep032/subtask_07/ground_truth.mp4",
+          "predicted": "/touchworld/twm_demos/stack_cups_ep032/subtask_07/predicted.mp4",
+          "groundTruthPoster": "/touchworld/twm_demos/stack_cups_ep032/subtask_07/ground_truth_poster.jpg",
+          "predictedPoster": "/touchworld/twm_demos/stack_cups_ep032/subtask_07/predicted_poster.jpg"
+        },
+        {
+          "id": "subtask_08",
+          "index": 8,
+          "instruction": "Use the right hand to place the lower-right cup on the cup rack.",
+          "frameCount": 17,
+          "inputStart": "/touchworld/twm_demos/stack_cups_ep032/subtask_08/input_start.png",
+          "groundTruth": "/touchworld/twm_demos/stack_cups_ep032/subtask_08/ground_truth.mp4",
+          "predicted": "/touchworld/twm_demos/stack_cups_ep032/subtask_08/predicted.mp4",
+          "groundTruthPoster": "/touchworld/twm_demos/stack_cups_ep032/subtask_08/ground_truth_poster.jpg",
+          "predictedPoster": "/touchworld/twm_demos/stack_cups_ep032/subtask_08/predicted_poster.jpg"
+        },
+        {
+          "id": "subtask_09",
+          "index": 9,
+          "instruction": "Use the right hand to approach and grasp the upper-right cup.",
+          "frameCount": 17,
+          "inputStart": "/touchworld/twm_demos/stack_cups_ep032/subtask_09/input_start.png",
+          "groundTruth": "/touchworld/twm_demos/stack_cups_ep032/subtask_09/ground_truth.mp4",
+          "predicted": "/touchworld/twm_demos/stack_cups_ep032/subtask_09/predicted.mp4",
+          "groundTruthPoster": "/touchworld/twm_demos/stack_cups_ep032/subtask_09/ground_truth_poster.jpg",
+          "predictedPoster": "/touchworld/twm_demos/stack_cups_ep032/subtask_09/predicted_poster.jpg"
+        },
+        {
+          "id": "subtask_10",
+          "index": 10,
+          "instruction": "Use the right hand to lift the upper-right cup and move it to the cup rack.",
+          "frameCount": 17,
+          "inputStart": "/touchworld/twm_demos/stack_cups_ep032/subtask_10/input_start.png",
+          "groundTruth": "/touchworld/twm_demos/stack_cups_ep032/subtask_10/ground_truth.mp4",
+          "predicted": "/touchworld/twm_demos/stack_cups_ep032/subtask_10/predicted.mp4",
+          "groundTruthPoster": "/touchworld/twm_demos/stack_cups_ep032/subtask_10/ground_truth_poster.jpg",
+          "predictedPoster": "/touchworld/twm_demos/stack_cups_ep032/subtask_10/predicted_poster.jpg"
+        },
+        {
+          "id": "subtask_11",
+          "index": 11,
+          "instruction": "Use the right hand to place the upper-right cup on the cup rack.",
+          "frameCount": 17,
+          "inputStart": "/touchworld/twm_demos/stack_cups_ep032/subtask_11/input_start.png",
+          "groundTruth": "/touchworld/twm_demos/stack_cups_ep032/subtask_11/ground_truth.mp4",
+          "predicted": "/touchworld/twm_demos/stack_cups_ep032/subtask_11/predicted.mp4",
+          "groundTruthPoster": "/touchworld/twm_demos/stack_cups_ep032/subtask_11/ground_truth_poster.jpg",
+          "predictedPoster": "/touchworld/twm_demos/stack_cups_ep032/subtask_11/predicted_poster.jpg"
+        },
+        {
+          "id": "subtask_12",
+          "index": 12,
+          "instruction": "Return to the initial pose.",
+          "frameCount": 17,
+          "inputStart": "/touchworld/twm_demos/stack_cups_ep032/subtask_12/input_start.png",
+          "groundTruth": "/touchworld/twm_demos/stack_cups_ep032/subtask_12/ground_truth.mp4",
+          "predicted": "/touchworld/twm_demos/stack_cups_ep032/subtask_12/predicted.mp4",
+          "groundTruthPoster": "/touchworld/twm_demos/stack_cups_ep032/subtask_12/ground_truth_poster.jpg",
+          "predictedPoster": "/touchworld/twm_demos/stack_cups_ep032/subtask_12/predicted_poster.jpg"
+        }
+      ]
+    }
+  ]
+}

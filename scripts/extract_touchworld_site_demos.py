@@ -18,8 +18,12 @@ import zarr
 TASK_LABELS = {
     "grasp_milktea_bottle": "Grasp Milktea Bottle",
     "grasp_water_bottle": "Grasp Water Bottle",
+    "insert_plug": "Insert Plug",
+    "pull_tissue": "Pull Tissue",
+    "scrub_pan": "Scrub Pan",
     "spray_water": "Spray Water",
     "stack_cups": "Stack Cups",
+    "wipe_cup": "Wipe Cup",
 }
 
 FPS = 30
@@ -232,6 +236,11 @@ def main() -> None:
     parser.add_argument("--episode-index", type=int, default=0, help="Episode index to extract from each task zarr.")
     parser.add_argument("--crf", type=int, default=24, help="H.264 quality setting; lower is higher quality/larger file.")
     parser.add_argument("--limit-frames", type=int, default=None, help="Debug only: export only the first N frames.")
+    parser.add_argument(
+        "--tasks",
+        default=None,
+        help="Optional comma-separated task ids to export from the source directory.",
+    )
     args = parser.parse_args()
 
     source_root = Path(args.source).expanduser().resolve()
@@ -244,9 +253,12 @@ def main() -> None:
         previous_manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
         previous_tasks_by_id = {task["id"]: task for task in previous_manifest.get("tasks", [])}
 
+    selected_tasks = {task.strip() for task in args.tasks.split(",")} if args.tasks else None
     zarr_paths = sorted(source_root.glob("*.zarr"))
+    if selected_tasks is not None:
+        zarr_paths = [path for path in zarr_paths if path.stem in selected_tasks]
     if not zarr_paths:
-        raise FileNotFoundError(f"No .zarr task directories found in {source_root}")
+        raise FileNotFoundError(f"No matching .zarr task directories found in {source_root}")
 
     tasks = []
     exported_task_ids = set()

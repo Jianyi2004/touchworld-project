@@ -1,0 +1,89 @@
+{
+  "taskId": "insert_plug",
+  "label": "Insert Plug",
+  "source": "/data_all/intern10/egoscale/ftp1-policy/tmp/wuji_test_split_20260709_141903/stage2_resumable_full/insert_plug.zarr",
+  "fps": 30,
+  "episodes": [
+    {
+      "episodeIndex": 0,
+      "startFrame": 0,
+      "endFrameExclusive": 2069,
+      "frameCount": 2069,
+      "duration": 68.9667,
+      "video": "/touchworld/candidate_trajectories/insert_plug/episode_000_main.mp4",
+      "poster": "/touchworld/candidate_trajectories/insert_plug/episode_000_poster.jpg"
+    },
+    {
+      "episodeIndex": 1,
+      "startFrame": 2069,
+      "endFrameExclusive": 2387,
+      "frameCount": 318,
+      "duration": 10.6,
+      "video": "/touchworld/candidate_trajectories/insert_plug/episode_001_main.mp4",
+      "poster": "/touchworld/candidate_trajectories/insert_plug/episode_001_poster.jpg"
+    },
+    {
+      "episodeIndex": 2,
+      "startFrame": 2387,
+      "endFrameExclusive": 2918,
+      "frameCount": 531,
+      "duration": 17.7,
+      "video": "/touchworld/candidate_trajectories/insert_plug/episode_002_main.mp4",
+      "poster": "/touchworld/candidate_trajectories/insert_plug/episode_002_poster.jpg"
+    },
+    {
+      "episodeIndex": 3,
+      "startFrame": 2918,
+      "endFrameExclusive": 3240,
+      "frameCount": 322,
+      "duration": 10.7333,
+      "video": "/touchworld/candidate_trajectories/insert_plug/episode_003_main.mp4",
+      "poster": "/touchworld/candidate_trajectories/insert_plug/episode_003_poster.jpg"
+    },
+    {
+      "episodeIndex": 4,
+      "startFrame": 3240,
+      "endFrameExclusive": 3685,
+      "frameCount": 445,
+      "duration": 14.8333,
+      "video": "/touchworld/candidate_trajectories/insert_plug/episode_004_main.mp4",
+      "poster": "/touchworld/candidate_trajectories/insert_plug/episode_004_poster.jpg"
+    },
+    {
+      "episodeIndex": 5,
+      "startFrame": 3685,
+      "endFrameExclusive": 4157,
+      "frameCount": 472,
+      "duration": 15.7333,
+      "video": "/touchworld/candidate_trajectories/insert_plug/episode_005_main.mp4",
+      "poster": "/touchworld/candidate_trajectories/insert_plug/episode_005_poster.jpg"
+    },
+    {
+      "episodeIndex": 6,
+      "startFrame": 4157,
+      "endFrameExclusive": 4516,
+      "frameCount": 359,
+      "duration": 11.9667,
+      "video": "/touchworld/candidate_trajectories/insert_plug/episode_006_main.mp4",
+      "poster": "/touchworld/candidate_trajectories/insert_plug/episode_006_poster.jpg"
+    },
+    {
+      "episodeIndex": 7,
+      "startFrame": 4516,
+      "endFrameExclusive": 5016,
+      "frameCount": 500,
+      "duration": 16.6667,
+      "video": "/touchworld/candidate_trajectories/insert_plug/episode_007_main.mp4",
+      "poster": "/touchworld/candidate_trajectories/insert_plug/episode_007_poster.jpg"
+    },
+    {
+      "episodeIndex": 8,
+      "startFrame": 5016,
+      "endFrameExclusive": 5324,
+      "frameCount": 308,
+      "duration": 10.2667,
+      "video": "/touchworld/candidate_trajectories/insert_plug/episode_008_main.mp4",
+      "poster": "/touchworld/candidate_trajectories/insert_plug/episode_008_poster.jpg"
+    }
+  ]
+}

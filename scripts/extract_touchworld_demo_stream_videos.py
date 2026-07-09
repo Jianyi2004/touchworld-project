@@ -115,6 +115,11 @@ def main() -> None:
     )
     parser.add_argument("--episode-index", type=int, default=0, help="Episode index to export from each task zarr.")
     parser.add_argument("--crf", type=int, default=24, help="H.264 quality setting; lower is higher quality/larger file.")
+    parser.add_argument(
+        "--tasks",
+        default=None,
+        help="Optional comma-separated task ids to export from the source directory.",
+    )
     args = parser.parse_args()
 
     source_root = Path(args.source).expanduser().resolve()
@@ -123,7 +128,14 @@ def main() -> None:
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     tasks_by_id = {task["id"]: task for task in manifest["tasks"]}
 
-    for zarr_path in sorted(source_root.glob("*.zarr")):
+    selected_tasks = {task.strip() for task in args.tasks.split(",")} if args.tasks else None
+    zarr_paths = sorted(source_root.glob("*.zarr"))
+    if selected_tasks is not None:
+        zarr_paths = [path for path in zarr_paths if path.stem in selected_tasks]
+    if not zarr_paths:
+        raise FileNotFoundError(f"No matching .zarr task directories found in {source_root}")
+
+    for zarr_path in zarr_paths:
         task_id = zarr_path.stem
         group = zarr.open(str(zarr_path), mode="r")
         episode_ends = np.asarray(group["meta/episode_ends"])
