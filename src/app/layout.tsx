@@ -58,13 +58,16 @@ const jetBrainsMono = localFont({
 });
 
 const siteBasePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "/touchworld-project";
+const faviconPath = `${siteBasePath}/touchworld/logos/phanes_logo.png`;
 
 export const metadata: Metadata = {
   title: "TouchWorld: A Predictive and Reactive Tactile Foundation Model",
   description:
     "Project page for TouchWorld, a predictive and reactive tactile foundation model for dexterous manipulation.",
   icons: {
-    icon: `${siteBasePath}/seo/favicon.svg`,
+    icon: faviconPath,
+    shortcut: faviconPath,
+    apple: faviconPath,
   },
 };
 

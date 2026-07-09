@@ -121,7 +121,7 @@ const titleLogos = [
   },
   {
     alt: "PHANES AI",
-    src: assetPath("/touchworld/logos/sologo-aitools-bgremover-trimmed.png"),
+    src: assetPath("/touchworld/logos/phance_ai_logo_word.png"),
     width: 1407,
     height: 288,
   },
