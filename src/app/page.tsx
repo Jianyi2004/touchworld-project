@@ -23,6 +23,7 @@ type ArticleBlock =
   | { type: "learned-policy-panels" }
   | { type: "system-intro" }
   | { type: "trajectory-demo" }
+  | { type: "dataset-collection-gallery" }
   | { type: "twm-comparison-demo" }
   | { type: "twm-prediction-table" }
   | { type: "main-results-table" }
@@ -35,6 +36,7 @@ function isFigureBlock(block: ArticleBlock) {
 
   return (
     block.type === "trajectory-demo" ||
+    block.type === "dataset-collection-gallery" ||
     block.type === "twm-comparison-demo"
   );
 }
@@ -49,15 +51,12 @@ const outlineItems = [
   { href: "#tactile-refinement", label: "Tactile Refinement", level: 2 },
   { href: "#experiments", label: "Dataset & Benchmark" },
   { href: "#trajectory-samples", label: "Trajectory Samples", level: 2 },
+  { href: "#dataset-collection-gallery", label: "Collection Rollouts", level: 2 },
   { href: "#benchmark-results", label: "Benchmark Results" },
   { href: "#twm-evaluation", label: "TWM Evaluation", level: 2 },
   { href: "#twm-prediction-demos", label: "TWM Prediction Demos", level: 2 },
   { href: "#planner-analysis", label: "Planner Analysis", level: 2 },
   { href: "#qualitative-analysis", label: "Qualitative Analysis" },
-  { href: "#case-grasp-water-bottle", label: "Case 1: Grasp Water Bottle", level: 3 },
-  { href: "#case-grasp-milktea-bottle", label: "Case 2: Grasp Milktea Bottle", level: 3 },
-  { href: "#case-spray-water", label: "Case 3: Spray Water", level: 3 },
-  { href: "#case-stack-cups", label: "Case 4: Stack Cups", level: 3 },
   { href: "#limitations", label: "Limitations & Future Directions" },
   { href: "#acknowledgements", label: "Acknowledgements" },
 ];
@@ -204,6 +203,11 @@ const article: ArticleBlock[] = [
     width: 2300,
   },
   { type: "trajectory-demo" },
+  {
+    type: "paragraph",
+    text: "We also show representative teleoperated collection rollouts from the dataset. These clips are human-collected demonstrations rather than model inference outputs.",
+  },
+  { type: "dataset-collection-gallery" },
   { type: "heading", text: "Benchmark Results" },
   {
     type: "paragraph",
@@ -236,15 +240,6 @@ const article: ArticleBlock[] = [
     type: "paragraph",
     text: "TouchWorld decomposes each instruction into executable intermediate subtasks and predicts tactile subgoals that provide contact-aware references for downstream action generation.",
   },
-  { type: "learned-policy-panels" },
-  { type: "subhead", text: "Case 1: Grasp Water Bottle" },
-  { type: "pusht-reset-case" },
-  { type: "subhead", text: "Case 2: Grasp Milktea Bottle" },
-  { type: "pin-reset-case" },
-  { type: "subhead", text: "Case 3: Spray Water" },
-  { type: "ziptie-reset-case" },
-  { type: "subhead", text: "Case 4: Stack Cups" },
-  { type: "gpu-reset-case" },
   {
     type: "list",
     items: [
@@ -915,13 +910,147 @@ function PlannerMetricsTable() {
   );
 }
 
-function touchWorldCaseStates(taskId: string) {
-  return [0, 1, 2, 3].map((episodeIndex) => ({
+function touchWorldCaseStates(taskId: string, episodeIndices = [0, 1, 2, 3]) {
+  return episodeIndices.map((episodeIndex, displayIndex) => ({
     id: `${taskId}-episode-${episodeIndex}`,
-    label: `Trajectory ${episodeIndex + 1}`,
+    label: `Trajectory ${displayIndex + 1}`,
     poster: assetPath(`/touchworld/cases/${taskId}/episode_${String(episodeIndex).padStart(2, "0")}.jpg`),
     video: assetPath(`/touchworld/cases/${taskId}/episode_${String(episodeIndex).padStart(2, "0")}.mp4`),
   }));
+}
+
+type DatasetCollectionTask = {
+  id: string;
+  label: string;
+  note: string;
+  trajectories: ReturnType<typeof touchWorldCaseStates>;
+};
+
+function DatasetCollectionGallery({ figureNumber }: { figureNumber: number }) {
+  const tasks: DatasetCollectionTask[] = [
+    {
+      id: "grasp_water_bottle",
+      label: "Grasp Water Bottle",
+      note: "Basket placement with bottle grasping and release.",
+      trajectories: touchWorldCaseStates("grasp_water_bottle"),
+    },
+    {
+      id: "grasp_milktea_bottle",
+      label: "Grasp Milktea Bottle",
+      note: "Beverage handling under synchronized RGB and tactile sensing.",
+      trajectories: touchWorldCaseStates("grasp_milktea_bottle"),
+    },
+    {
+      id: "spray_water",
+      label: "Spray Water",
+      note: "Pressure buildup and spray actuation over a long-horizon task.",
+      trajectories: touchWorldCaseStates("spray_water"),
+    },
+    {
+      id: "stack_cups",
+      label: "Stack Cups",
+      note: "Sequential cup placement with repeated contact-rich phases.",
+      trajectories: touchWorldCaseStates("stack_cups"),
+    },
+    {
+      id: "insert_plug",
+      label: "Insert Plug",
+      note: "Plug insertion with precision alignment and contact feedback.",
+      trajectories: touchWorldCaseStates("insert_plug"),
+    },
+    {
+      id: "pull_tissue",
+      label: "Pull Tissue",
+      note: "Soft-object pulling under changing contact and deformation.",
+      trajectories: touchWorldCaseStates("pull_tissue", [0, 1, 4, 5]),
+    },
+    {
+      id: "scrub_pan",
+      label: "Scrub Pan",
+      note: "Continuous wiping contact on a pan surface.",
+      trajectories: touchWorldCaseStates("scrub_pan", [0, 12, 24, 36]),
+    },
+    {
+      id: "wipe_cup",
+      label: "Wipe Cup",
+      note: "Cup wiping with sustained hand-object contact.",
+      trajectories: touchWorldCaseStates("wipe_cup", [0, 30, 60, 90]),
+    },
+  ];
+  const [activeTaskId, setActiveTaskId] = useState(tasks[0].id);
+  const [activeTrajectoryId, setActiveTrajectoryId] = useState(tasks[0].trajectories[0].id);
+
+  const activeTask = tasks.find((task) => task.id === activeTaskId) ?? tasks[0];
+  const activeTrajectory =
+    activeTask.trajectories.find((trajectory) => trajectory.id === activeTrajectoryId) ?? activeTask.trajectories[0];
+
+  const selectTask = (taskId: string) => {
+    const nextTask = tasks.find((task) => task.id === taskId);
+    if (!nextTask || nextTask.id === activeTaskId) {
+      return;
+    }
+    setActiveTaskId(nextTask.id);
+    setActiveTrajectoryId(nextTask.trajectories[0].id);
+  };
+
+  return (
+    <figure className="dataset-collection" id="dataset-collection-gallery">
+      <div className="dataset-collection__head">
+        <div>
+          <span>Dataset collection</span>
+          <h3>Human-collected demonstration rollouts</h3>
+        </div>
+        <p>{activeTask.note}</p>
+      </div>
+
+      <div className="dataset-collection__tabs" role="tablist" aria-label="Dataset collection tasks">
+        {tasks.map((task) => (
+          <button
+            aria-selected={task.id === activeTask.id}
+            data-active={task.id === activeTask.id}
+            key={task.id}
+            onClick={() => selectTask(task.id)}
+            role="tab"
+            type="button"
+          >
+            {task.label}
+          </button>
+        ))}
+      </div>
+
+      <div className="dataset-collection__stage">
+        <div className="dataset-collection__video">
+          <VideoPlayer
+            autoPlay
+            key={activeTrajectory.id}
+            loop
+            poster={activeTrajectory.poster}
+            src={activeTrajectory.video}
+            title={`${activeTask.label} ${activeTrajectory.label}`}
+          />
+        </div>
+        <div className="dataset-collection__rail" aria-label={`${activeTask.label} trajectories`}>
+          {activeTask.trajectories.map((trajectory) => (
+            <button
+              aria-pressed={trajectory.id === activeTrajectory.id}
+              data-active={trajectory.id === activeTrajectory.id}
+              key={trajectory.id}
+              onClick={() => setActiveTrajectoryId(trajectory.id)}
+              type="button"
+            >
+              <Image alt="" height={90} src={trajectory.poster} width={160} />
+              <span>{trajectory.label}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <figcaption>
+        Figure {figureNumber}: Representative dataset collection rollouts. The clips are teleoperated demonstrations
+        used for data collection, not model inference results.
+      </figcaption>
+    </figure>
+  );
 }
 
 function GraspWaterBottleCasePanel() {
@@ -1699,6 +1828,10 @@ function ArticleContent() {
 
           if (block.type === "trajectory-demo") {
             return <TouchWorldTrajectoryExplorer figureNumber={currentFigureNumber ?? 0} key={index} />;
+          }
+
+          if (block.type === "dataset-collection-gallery") {
+            return <DatasetCollectionGallery figureNumber={currentFigureNumber ?? 0} key={index} />;
           }
 
           if (block.type === "twm-comparison-demo") {

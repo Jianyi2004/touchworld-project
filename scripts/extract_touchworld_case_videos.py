@@ -85,6 +85,11 @@ def main() -> None:
         default="/data_all/intern10/egoscale/ftp1-policy/enpire-research.github.io/public/touchworld/cases",
         help="Output directory under the website public folder.",
     )
+    parser.add_argument(
+        "--tasks",
+        default="",
+        help="Optional comma-separated task ids to export. Defaults to every .zarr under --source.",
+    )
     parser.add_argument("--episodes", default="0,1,2,3", help="Comma-separated episode indices per task.")
     parser.add_argument("--crf", type=int, default=23, help="H.264 quality setting; lower is higher quality/larger file.")
     args = parser.parse_args()
@@ -92,9 +97,12 @@ def main() -> None:
     source_root = Path(args.source).expanduser().resolve()
     output_root = Path(args.output).expanduser().resolve()
     episode_indices = [int(item) for item in args.episodes.split(",") if item.strip()]
+    requested_tasks = {item.strip() for item in args.tasks.split(",") if item.strip()}
 
     for zarr_path in sorted(source_root.glob("*.zarr")):
         task_id = zarr_path.stem
+        if requested_tasks and task_id not in requested_tasks:
+            continue
         group = zarr.open(str(zarr_path), mode="r")
         episode_ends = np.asarray(group["meta/episode_ends"])
         task_output = output_root / task_id
